@@ -12,7 +12,7 @@
    "build": "next build",
    "start": "next start",
    "lint": "next lint",
-   "seed": "ts-node prisma/seed.ts",
+   "seed": "ts-node-esm prisma/seed.ts",
    "heroku-postbuild": "next build && npm run seed"
   },
   "dependencies": {
