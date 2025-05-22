@@ -8,12 +8,12 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "seed": "ts-node --loader ts-node/esm prisma/seed.ts",
-    "heroku-postbuild": "next build && npm run seed"
+   "dev": "next dev",
+   "build": "next build",
+   "start": "next start",
+   "lint": "next lint",
+   "seed": "ts-node prisma/seed.ts",
+   "heroku-postbuild": "next build && npm run seed"
   },
   "dependencies": {
     "@clerk/elements": "^0.14.6",
