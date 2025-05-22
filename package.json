@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "heroku-postbuild": "next build && ts-node prisma/seed.ts"
+    "seed": "ts-node --loader ts-node/esm prisma/seed.ts",
+    "heroku-postbuild": "next build && npm run seed"
   },
   "dependencies": {
     "@clerk/elements": "^0.14.6",
