@@ -12,7 +12,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "heroku-postbuild": "next build"
+    "heroku-postbuild": "next build && ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@clerk/elements": "^0.14.6",
