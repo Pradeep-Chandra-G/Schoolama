@@ -15,8 +15,7 @@
     "heroku-postbuild": "next build"
   },
   "dependencies": {
-    "@clerk/elements": "^0.14.6",
-    "@clerk/nextjs": "^5.7.5",
+    "@clerk/nextjs": "^6.20.0",
     "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.19.1",
     "@types/react-big-calendar": "^1.8.9",
@@ -53,4 +52,3 @@
     "seed": "ts-node prisma/seed.ts"
   }
 }
-
