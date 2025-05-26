@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["developers.google.com"],
+    domains: [],
     remotePatterns: [
-      { hostname: 
-        "images.pexels.com"
-      }
-      ,{hostname: "res.cloudinary.com"}
+      { hostname: "images.pexels.com" },
+      { hostname: "res.cloudinary.com" },
+      { hostname : "developers.google.com" }
     ],
     
   },

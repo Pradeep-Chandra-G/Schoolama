@@ -1,76 +1,3 @@
-"use client";
-
-import * as Clerk from "@clerk/elements/common";
-import * as SignIn from "@clerk/elements/sign-in";
-import { useUser } from "@clerk/nextjs";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
-const LoginPage = () => {
-  const { isLoaded, isSignedIn, user } = useUser();
-
-  const router = useRouter();
-
-  useEffect(() => {
-    const role = user?.publicMetadata.role;
-    console.log(role);
-
-    if (role) {
-      router.push(`/${role}`);
-    }
-  }, [user, router]);
-
-  return (
-    <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
-      <SignIn.Root>
-        <SignIn.Step
-          name="start"
-          className="bg-white p-12 rounded-md shadow-2xl flex flex-col gap-2"
-        >
-          <h1 className="text-xl font-bold flex items-center gap-2">
-            <Image src="/logo.png" alt="" width={24} height={24} />
-            SchooLama
-          </h1>
-          <h2 className="text-gray-400">Sign in to your account</h2>
-          <Clerk.GlobalError className="text-sm text-red-400" />
-          <Clerk.Field name="identifier" className="flex flex-col gap-2">
-            <Clerk.Label className="text-xs text-gray-500">
-              Username
-            </Clerk.Label>
-            <Clerk.Input
-              type="text"
-              required
-              className="p-2 rounded-md ring-1 ring-gray-300"
-            />
-            <Clerk.FieldError className="text-xs text-red-400" />
-          </Clerk.Field>
-          <Clerk.Field name="password" className="flex flex-col gap-2">
-            <Clerk.Label className="text-xs text-gray-500">
-              Password
-            </Clerk.Label>
-            <Clerk.Input
-              type="password"
-              required
-              className="p-2 rounded-md ring-1 ring-gray-300"
-            />
-            <Clerk.FieldError className="text-xs text-red-400" />
-          </Clerk.Field>
-          <SignIn.Action
-            submit
-            className="bg-blue-500 text-white my-1 rounded-md text-sm p-[10px]"
-          >
-            Sign In
-          </SignIn.Action>
-        </SignIn.Step>
-      </SignIn.Root>
-    </div>
-  );
-};
-
-export default LoginPage;
-
-
 // "use client";
 
 // import * as Clerk from "@clerk/elements/common";
@@ -1053,8 +980,6 @@ export default LoginPage;
 //   useEffect(() => {
 //     if (isLoaded && isSignedIn && user) {
 //       const role = user?.publicMetadata?.role as string;
-//       console.log(role);
-
 //       if (role) {
 //         router.push(`/${role}`);
 //       }
@@ -1068,18 +993,17 @@ export default LoginPage;
 
 //   const handleRoleSubmit = async (role: string) => {
 //     try {
-//       // Use Clerk's user.update method directly
 //       if (user) {
 //         await user.update({
 //           unsafeMetadata: { role }
 //         });
-//         // Force a reload to get updated user data
+//         // Force reload to get updated user data
 //         window.location.reload();
 //         return true;
 //       }
 //       return false;
 //     } catch (error) {
-//       console.error('Error setting role:', error);
+//       console.error("Error setting role:", error);
 //       return false;
 //     }
 //   };
@@ -1098,17 +1022,17 @@ export default LoginPage;
 //             </h1>
 //             <h2 className="text-gray-400">Sign in to your account</h2>
 //             <Clerk.GlobalError className="text-sm text-red-400" />
-            
+
 //             {/* Google Sign In Button */}
 //             <Clerk.Connection
 //               name="google"
 //               className="flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors"
 //             >
-//               <Image 
-//                 src="https://developers.google.com/identity/images/g-logo.png" 
-//                 alt="Google" 
-//                 width={18} 
-//                 height={18} 
+//               <Image
+//                 src="https://developers.google.com/identity/images/g-logo.png"
+//                 alt="Google"
+//                 width={18}
+//                 height={18}
 //               />
 //               <span className="text-sm">Continue with Google</span>
 //             </Clerk.Connection>
@@ -1121,9 +1045,7 @@ export default LoginPage;
 //             </div>
 
 //             <Clerk.Field name="identifier" className="flex flex-col gap-2">
-//               <Clerk.Label className="text-xs text-gray-500">
-//                 Username
-//               </Clerk.Label>
+//               <Clerk.Label className="text-xs text-gray-500">Username</Clerk.Label>
 //               <Clerk.Input
 //                 type="text"
 //                 required
@@ -1132,9 +1054,7 @@ export default LoginPage;
 //               <Clerk.FieldError className="text-xs text-red-400" />
 //             </Clerk.Field>
 //             <Clerk.Field name="password" className="flex flex-col gap-2">
-//               <Clerk.Label className="text-xs text-gray-500">
-//                 Password
-//               </Clerk.Label>
+//               <Clerk.Label className="text-xs text-gray-500">Password</Clerk.Label>
 //               <Clerk.Input
 //                 type="password"
 //                 required
@@ -1142,6 +1062,7 @@ export default LoginPage;
 //               />
 //               <Clerk.FieldError className="text-xs text-red-400" />
 //             </Clerk.Field>
+
 //             <SignIn.Action
 //               submit
 //               className="bg-blue-500 text-white my-1 rounded-md text-sm p-[10px] hover:bg-blue-600 transition-colors"
@@ -1153,10 +1074,7 @@ export default LoginPage;
 //             <div className="text-center mt-4">
 //               <span className="text-xs text-gray-500">
 //                 Don't have an account?{" "}
-//                 <button
-//                   onClick={toggleMode}
-//                   className="text-blue-500 hover:underline"
-//                 >
+//                 <button onClick={toggleMode} className="text-blue-500 hover:underline">
 //                   Sign up
 //                 </button>
 //               </span>
@@ -1175,17 +1093,17 @@ export default LoginPage;
 //             </h1>
 //             <h2 className="text-gray-400">Create your account</h2>
 //             <Clerk.GlobalError className="text-sm text-red-400" />
-            
+
 //             {/* Google Sign Up Button */}
 //             <Clerk.Connection
 //               name="google"
 //               className="flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors"
 //             >
-//               <Image 
-//                 src="https://developers.google.com/identity/images/g-logo.png" 
-//                 alt="Google" 
-//                 width={18} 
-//                 height={18} 
+//               <Image
+//                 src="https://developers.google.com/identity/images/g-logo.png"
+//                 alt="Google"
+//                 width={18}
+//                 height={18}
 //               />
 //               <span className="text-sm">Continue with Google</span>
 //             </Clerk.Connection>
@@ -1198,9 +1116,7 @@ export default LoginPage;
 //             </div>
 
 //             <Clerk.Field name="firstName" className="flex flex-col gap-2">
-//               <Clerk.Label className="text-xs text-gray-500">
-//                 First Name
-//               </Clerk.Label>
+//               <Clerk.Label className="text-xs text-gray-500">First Name</Clerk.Label>
 //               <Clerk.Input
 //                 type="text"
 //                 required
@@ -1209,9 +1125,7 @@ export default LoginPage;
 //               <Clerk.FieldError className="text-xs text-red-400" />
 //             </Clerk.Field>
 //             <Clerk.Field name="lastName" className="flex flex-col gap-2">
-//               <Clerk.Label className="text-xs text-gray-500">
-//                 Last Name
-//               </Clerk.Label>
+//               <Clerk.Label className="text-xs text-gray-500">Last Name</Clerk.Label>
 //               <Clerk.Input
 //                 type="text"
 //                 required
@@ -1220,9 +1134,7 @@ export default LoginPage;
 //               <Clerk.FieldError className="text-xs text-red-400" />
 //             </Clerk.Field>
 //             <Clerk.Field name="emailAddress" className="flex flex-col gap-2">
-//               <Clerk.Label className="text-xs text-gray-500">
-//                 Email Address
-//               </Clerk.Label>
+//               <Clerk.Label className="text-xs text-gray-500">Email Address</Clerk.Label>
 //               <Clerk.Input
 //                 type="email"
 //                 required
@@ -1231,9 +1143,7 @@ export default LoginPage;
 //               <Clerk.FieldError className="text-xs text-red-400" />
 //             </Clerk.Field>
 //             <Clerk.Field name="password" className="flex flex-col gap-2">
-//               <Clerk.Label className="text-xs text-gray-500">
-//                 Password
-//               </Clerk.Label>
+//               <Clerk.Label className="text-xs text-gray-500">Password</Clerk.Label>
 //               <Clerk.Input
 //                 type="password"
 //                 required
@@ -1262,17 +1172,24 @@ export default LoginPage;
 //               )}
 //             </div>
 
+//             {/* CAPTCHA placeholder for Smart CAPTCHA */}
+//             <div id="clerk-captcha"></div>
+
+//             {/* Submit Button */}
 //             <SignUp.Action
 //               submit
-//               className="bg-blue-500 text-white my-1 rounded-md text-sm p-[10px] hover:bg-blue-600 transition-colors"
-//               onClick={(e) => {
-//                 if (!selectedRole) {
-//                   e.preventDefault();
-//                   return;
-//                 }
-//                 // Store role for later use
-//                 if (typeof window !== 'undefined') {
-//                   window.selectedRole = selectedRole;
+//               disabled={!selectedRole}
+//               className={`my-1 rounded-md text-sm p-[10px] text-white transition-colors ${
+//                 selectedRole ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-300 cursor-not-allowed"
+//               }`}
+//               onClick={async () => {
+//                 if (!selectedRole) return;
+
+//                 const success = await handleRoleSubmit(selectedRole);
+//                 if (success) {
+//                   // After setting role, page reloads
+//                 } else {
+//                   alert("Error setting role. Please try again.");
 //                 }
 //               }}
 //             >
@@ -1283,88 +1200,458 @@ export default LoginPage;
 //             <div className="text-center mt-4">
 //               <span className="text-xs text-gray-500">
 //                 Already have an account?{" "}
-//                 <button
-//                   onClick={toggleMode}
-//                   className="text-blue-500 hover:underline"
-//                 >
+//                 <button onClick={toggleMode} className="text-blue-500 hover:underline">
 //                   Sign in
 //                 </button>
 //               </span>
 //             </div>
 //           </SignUp.Step>
+//         </SignUp.Root>
+//       )}
+//     </div>
+//   );
+// };
 
-//           {/* Verification Step */}
-//           <SignUp.Step
-//             name="verifications"
+// export default LoginPage;
+
+
+// "use client";
+
+// import * as Clerk from "@clerk/elements/common";
+// import * as SignIn from "@clerk/elements/sign-in";
+// import * as SignUp from "@clerk/elements/sign-up";
+// import { useUser } from "@clerk/nextjs";
+// import Image from "next/image";
+// import { useRouter } from "next/navigation";
+// import { useEffect, useState } from "react";
+
+// // Extend Window interface for TypeScript
+// declare global {
+//   interface Window {
+//     selectedRole?: string;
+//   }
+// }
+
+// const LoginPage = () => {
+//   const { isLoaded, isSignedIn, user } = useUser();
+//   const [isSignUp, setIsSignUp] = useState(false);
+//   const [selectedRole, setSelectedRole] = useState<string>("");
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     if (isLoaded && isSignedIn && user) {
+//       const role = user?.publicMetadata?.role as string;
+//       if (role) {
+//         router.push(`/${role}`);
+//       }
+//     }
+//   }, [isLoaded, isSignedIn, user, router]);
+
+//   const toggleMode = () => {
+//     setIsSignUp(!isSignUp);
+//     setSelectedRole(""); // Reset role selection when switching modes
+//   };
+
+//   const handleRoleSubmit = async (role: string) => {
+//     try {
+//       if (user) {
+//         await user.update({
+//           unsafeMetadata: { role }
+//         });
+//         // Force reload to get updated user data
+//         window.location.reload();
+//         return true;
+//       }
+//       return false;
+//     } catch (error) {
+//       console.error("Error setting role:", error);
+//       return false;
+//     }
+//   };
+
+//   return (
+//     <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
+//       {!isSignUp ? (
+//         <SignIn.Root>
+//           <SignIn.Step
+//             name="start"
 //             className="bg-white p-12 rounded-md shadow-2xl flex flex-col gap-2"
 //           >
 //             <h1 className="text-xl font-bold flex items-center gap-2">
 //               <Image src="/logo.png" alt="" width={24} height={24} />
 //               SchooLama
 //             </h1>
-//             <h2 className="text-gray-400">Verify your email</h2>
+//             <h2 className="text-gray-400">Sign in to your account</h2>
 //             <Clerk.GlobalError className="text-sm text-red-400" />
-            
-//             <SignUp.Strategy name="email_code">
-//               <Clerk.Field name="code" className="flex flex-col gap-2">
-//                 <Clerk.Label className="text-xs text-gray-500">
-//                   Verification Code
-//                 </Clerk.Label>
-//                 <Clerk.Input
-//                   type="text"
-//                   required
-//                   className="p-2 rounded-md ring-1 ring-gray-300"
-//                 />
-//                 <Clerk.FieldError className="text-xs text-red-400" />
-//               </Clerk.Field>
-//               <SignUp.Action
-//                 submit
-//                 className="bg-blue-500 text-white my-1 rounded-md text-sm p-[10px] hover:bg-blue-600 transition-colors"
-//               >
-//                 Verify Email
-//               </SignUp.Action>
-//             </SignUp.Strategy>
 
-//             <SignUp.Action
-//               resend
-//               className="text-blue-500 text-xs hover:underline"
-//               fallback={({ resendableAfter }) => (
-//                 <span className="text-xs text-gray-500">
-//                   Resend code in {resendableAfter} seconds
-//                 </span>
-//               )}
+//             {/* Google Sign In Button */}
+//             <Clerk.Connection
+//               name="google"
+//               className="flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors"
 //             >
-//               Didn't receive a code? Resend
-//             </SignUp.Action>
-//           </SignUp.Step>
+//               <Image
+//                 src="https://developers.google.com/identity/images/g-logo.png"
+//                 alt="Google"
+//                 width={18}
+//                 height={18}
+//               />
+//               <span className="text-sm">Continue with Google</span>
+//             </Clerk.Connection>
 
-//           {/* Continue Step - This handles role assignment after sign-up */}
-//           <SignUp.Step
-//             name="continue"
-//             className="bg-white p-12 rounded-md shadow-2xl flex flex-col gap-2"
-//           >
-//             <h1 className="text-xl font-bold flex items-center gap-2">
-//               <Image src="/logo.png" alt="" width={24} height={24} />
-//               SchooLama
-//             </h1>
-//             <h2 className="text-gray-400">Complete your profile</h2>
-//             <Clerk.GlobalError className="text-sm text-red-400" />
-            
-//             <SignUp.Action
+//             {/* Divider */}
+//             <div className="flex items-center gap-3 my-4">
+//               <div className="flex-1 h-px bg-gray-300"></div>
+//               <span className="text-xs text-gray-500">or</span>
+//               <div className="flex-1 h-px bg-gray-300"></div>
+//             </div>
+
+//             <Clerk.Field name="identifier" className="flex flex-col gap-2">
+//               <Clerk.Label className="text-xs text-gray-500">Username</Clerk.Label>
+//               <Clerk.Input
+//                 type="text"
+//                 required
+//                 className="p-2 rounded-md ring-1 ring-gray-300"
+//               />
+//               <Clerk.FieldError className="text-xs text-red-400" />
+//             </Clerk.Field>
+//             <Clerk.Field name="password" className="flex flex-col gap-2">
+//               <Clerk.Label className="text-xs text-gray-500">Password</Clerk.Label>
+//               <Clerk.Input
+//                 type="password"
+//                 required
+//                 className="p-2 rounded-md ring-1 ring-gray-300"
+//               />
+//               <Clerk.FieldError className="text-xs text-red-400" />
+//             </Clerk.Field>
+
+//             <SignIn.Action
 //               submit
 //               className="bg-blue-500 text-white my-1 rounded-md text-sm p-[10px] hover:bg-blue-600 transition-colors"
+//             >
+//               Sign In
+//             </SignIn.Action>
+
+//             {/* Toggle to Sign Up */}
+//             <div className="text-center mt-4">
+//               <span className="text-xs text-gray-500">
+//                 Don't have an account?{" "}
+//                 <button onClick={toggleMode} className="text-blue-500 hover:underline">
+//                   Sign up
+//                 </button>
+//               </span>
+//             </div>
+//           </SignIn.Step>
+//         </SignIn.Root>
+//       ) : (
+//         <SignUp.Root>
+//           <SignUp.Step
+//             name="start"
+//             className="bg-white p-12 rounded-md shadow-2xl flex flex-col gap-2"
+//           >
+//             <h1 className="text-xl font-bold flex items-center gap-2">
+//               <Image src="/logo.png" alt="" width={24} height={24} />
+//               SchooLama
+//             </h1>
+//             <h2 className="text-gray-400">Create your account</h2>
+//             <Clerk.GlobalError className="text-sm text-red-400" />
+
+//             {/* Google Sign Up Button */}
+//             <Clerk.Connection
+//               name="google"
+//               className="flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors"
+//             >
+//               <Image
+//                 src="https://developers.google.com/identity/images/g-logo.png"
+//                 alt="Google"
+//                 width={18}
+//                 height={18}
+//               />
+//               <span className="text-sm">Continue with Google</span>
+//             </Clerk.Connection>
+
+//             {/* Divider */}
+//             <div className="flex items-center gap-3 my-4">
+//               <div className="flex-1 h-px bg-gray-300"></div>
+//               <span className="text-xs text-gray-500">or</span>
+//               <div className="flex-1 h-px bg-gray-300"></div>
+//             </div>
+
+//             <Clerk.Field name="firstName" className="flex flex-col gap-2">
+//               <Clerk.Label className="text-xs text-gray-500">First Name</Clerk.Label>
+//               <Clerk.Input
+//                 type="text"
+//                 required
+//                 className="p-2 rounded-md ring-1 ring-gray-300"
+//               />
+//               <Clerk.FieldError className="text-xs text-red-400" />
+//             </Clerk.Field>
+//             <Clerk.Field name="lastName" className="flex flex-col gap-2">
+//               <Clerk.Label className="text-xs text-gray-500">Last Name</Clerk.Label>
+//               <Clerk.Input
+//                 type="text"
+//                 required
+//                 className="p-2 rounded-md ring-1 ring-gray-300"
+//               />
+//               <Clerk.FieldError className="text-xs text-red-400" />
+//             </Clerk.Field>
+//             <Clerk.Field name="emailAddress" className="flex flex-col gap-2">
+//               <Clerk.Label className="text-xs text-gray-500">Email Address</Clerk.Label>
+//               <Clerk.Input
+//                 type="email"
+//                 required
+//                 className="p-2 rounded-md ring-1 ring-gray-300"
+//               />
+//               <Clerk.FieldError className="text-xs text-red-400" />
+//             </Clerk.Field>
+//             <Clerk.Field name="password" className="flex flex-col gap-2">
+//               <Clerk.Label className="text-xs text-gray-500">Password</Clerk.Label>
+//               <Clerk.Input
+//                 type="password"
+//                 required
+//                 className="p-2 rounded-md ring-1 ring-gray-300"
+//               />
+//               <Clerk.FieldError className="text-xs text-red-400" />
+//             </Clerk.Field>
+
+//             {/* Role Selection */}
+//             <div className="flex flex-col gap-2">
+//               <label className="text-xs text-gray-500">Role</label>
+//               <select
+//                 value={selectedRole}
+//                 onChange={(e) => setSelectedRole(e.target.value)}
+//                 required
+//                 className="p-2 rounded-md ring-1 ring-gray-300 bg-white"
+//               >
+//                 <option value="">Select your role</option>
+//                 <option value="admin">Admin</option>
+//                 <option value="teacher">Teacher</option>
+//                 <option value="student">Student</option>
+//                 <option value="parent">Parent</option>
+//               </select>
+//               {!selectedRole && (
+//                 <span className="text-xs text-red-400">Please select a role</span>
+//               )}
+//             </div>
+
+//             {/* CAPTCHA placeholder for Smart CAPTCHA */}
+//             <div id="clerk-captcha"></div>
+
+//             {/* Submit Button */}
+//             <SignUp.Action
+//               submit
+//               disabled={!selectedRole}
+//               className={`my-1 rounded-md text-sm p-[10px] text-white transition-colors ${
+//                 selectedRole ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-300 cursor-not-allowed"
+//               }`}
 //               onClick={async () => {
-//                 const roleToSet = selectedRole || (typeof window !== 'undefined' ? window.selectedRole : '');
-//                 if (roleToSet) {
-//                   await handleRoleSubmit(roleToSet);
+//                 if (!selectedRole) return;
+
+//                 const success = await handleRoleSubmit(selectedRole);
+//                 if (success) {
+//                   // After setting role, page reloads
+//                 } else {
+//                   alert("Error setting role. Please try again.");
 //                 }
 //               }}
 //             >
-//               Complete Sign Up
+//               Sign Up
 //             </SignUp.Action>
+
+//             {/* Toggle to Sign In */}
+//             <div className="text-center mt-4">
+//               <span className="text-xs text-gray-500">
+//                 Already have an account?{" "}
+//                 <button onClick={toggleMode} className="text-blue-500 hover:underline">
+//                   Sign in
+//                 </button>
+//               </span>
+//             </div>
 //           </SignUp.Step>
 //         </SignUp.Root>
 //       )}
+//     </div>
+//   );
+// };
+
+// export default LoginPage;
+
+// // app/sign-up/[[...sign-up]]/page.tsx
+// import { SignUp } from '@clerk/nextjs';
+
+// export default function SignUpPage() {
+//   return (
+//     <div className="min-h-screen flex items-center justify-center bg-lamaSkyLight">
+//       <div className="w-full max-w-md">
+//         <SignUp 
+//           appearance={{
+//             elements: {
+//               rootBox: "mx-auto",
+//               card: "bg-white p-12 rounded-md shadow-2xl",
+//               headerTitle: "text-xl font-bold text-gray-900",
+//               headerSubtitle: "text-gray-400 mt-2",
+//               socialButtonsBlockButton: "flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors",
+//               socialButtonsBlockButtonText: "text-sm",
+//               dividerLine: "bg-gray-300",
+//               dividerText: "text-xs text-gray-500",
+//               formFieldLabel: "text-xs text-gray-500",
+//               formFieldInput: "p-2 rounded-md ring-1 ring-gray-300 border-0 focus:ring-2 focus:ring-blue-500",
+//               formButtonPrimary: "bg-blue-500 text-white my-1 rounded-md text-sm p-[10px] hover:bg-blue-600 transition-colors w-full",
+//               footerActionLink: "text-blue-500 hover:underline text-xs",
+//               identityPreviewText: "text-sm text-gray-700",
+//               identityPreviewEditButton: "text-blue-500 hover:underline text-xs",
+//               formFieldError: "text-xs text-red-400",
+//               globalError: "text-sm text-red-400",
+//               alternativeMethodsBlockButton: "flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors text-sm",
+//             },
+//             layout: {
+//               socialButtonsPlacement: "top",
+//               showOptionalFields: true,
+//             },
+//             variables: {
+//               colorPrimary: "#3B82F6",
+//               colorBackground: "#FFFFFF",
+//               colorInputBackground: "#FFFFFF",
+//               colorInputText: "#374151",
+//               colorText: "#374151",
+//               colorTextSecondary: "#6B7280",
+//               colorDanger: "#EF4444",
+//               borderRadius: "0.375rem",
+//               fontFamily: "inherit",
+//               fontSize: "14px",
+//               spacingUnit: "0.5rem",
+//             }
+//           }}
+//           signInUrl="/sign-in"
+//         />
+//       </div>
+//     </div>
+//   );
+// }
+
+
+// "use client";
+
+// import { SignIn, SignUp } from "@clerk/nextjs";
+// import { useUser } from "@clerk/nextjs";
+// import Image from "next/image";
+// import { useRouter } from "next/navigation";
+// import { useEffect, useState } from "react";
+
+// const LoginPage = () => {
+//   const { isLoaded, isSignedIn, user } = useUser();
+//   const [isSignUp, setIsSignUp] = useState(false);
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     if (isLoaded && isSignedIn && user) {
+//       const role = user?.publicMetadata?.role as string;
+//       if (role) {
+//         router.push(`/${role}`);
+//       }
+//     }
+//   }, [isLoaded, isSignedIn, user, router]);
+
+//   const toggleMode = () => {
+//     setIsSignUp(!isSignUp);
+//   };
+
+//   return (
+//     <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
+//       <div className="bg-white p-8 rounded-md shadow-2xl">
+//         {/* Logo and Title */}
+//         <div className="flex flex-col items-center mb-6">
+//           <h1 className="text-xl font-bold flex items-center gap-2 mb-2">
+//             <Image src="/logo.png" alt="" width={24} height={24} />
+//             SchooLama
+//           </h1>
+//           <h2 className="text-gray-400">
+//             {isSignUp ? "Create your account" : "Sign in to your account"}
+//           </h2>
+//         </div>
+
+//         {/* Clerk Components */}
+//         {!isSignUp ? (
+//           <div className="flex flex-col items-center">
+//             <SignIn
+//               appearance={{
+//                 elements: {
+//                   rootBox: "w-full",
+//                   card: "shadow-none border-none bg-transparent p-0",
+//                   headerTitle: "hidden",
+//                   headerSubtitle: "hidden",
+//                   socialButtonsBlockButton: 
+//                     "flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors text-sm",
+//                   socialButtonsBlockButtonText: "text-sm",
+//                   dividerLine: "bg-gray-300",
+//                   dividerText: "text-xs text-gray-500",
+//                   formFieldLabel: "text-xs text-gray-500",
+//                   formFieldInput: "p-2 rounded-md ring-1 ring-gray-300",
+//                   formButtonPrimary: 
+//                     "bg-blue-500 text-white my-1 rounded-md text-sm p-[10px] hover:bg-blue-600 transition-colors",
+//                   footerActionLink: "text-blue-500 hover:underline text-xs",
+//                   footerActionText: "text-xs text-gray-500",
+//                   identityPreviewText: "text-sm",
+//                   identityPreviewEditButton: "text-blue-500 hover:underline",
+//                 },
+//                 layout: {
+//                   socialButtonsPlacement: "top",
+//                 },
+//               }}
+//               redirectUrl="/dashboard"
+//             />
+            
+//             {/* Toggle to Sign Up */}
+//             <div className="text-center mt-4">
+//               <span className="text-xs text-gray-500">
+//                 Don't have an account?{" "}
+//                 <button onClick={toggleMode} className="text-blue-500 hover:underline">
+//                   Sign up
+//                 </button>
+//               </span>
+//             </div>
+//           </div>
+//         ) : (
+//           <div className="flex flex-col items-center">
+//             <SignUp
+//               appearance={{
+//                 elements: {
+//                   rootBox: "w-full",
+//                   card: "shadow-none border-none bg-transparent p-0",
+//                   headerTitle: "hidden",
+//                   headerSubtitle: "hidden",
+//                   socialButtonsBlockButton: 
+//                     "flex items-center justify-center gap-2 p-2 rounded-md ring-1 ring-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors text-sm",
+//                   socialButtonsBlockButtonText: "text-sm",
+//                   dividerLine: "bg-gray-300",
+//                   dividerText: "text-xs text-gray-500",
+//                   formFieldLabel: "text-xs text-gray-500",
+//                   formFieldInput: "p-2 rounded-md ring-1 ring-gray-300",
+//                   formButtonPrimary: 
+//                     "bg-blue-500 text-white my-1 rounded-md text-sm p-[10px] hover:bg-blue-600 transition-colors",
+//                   footerActionLink: "text-blue-500 hover:underline text-xs",
+//                   footerActionText: "text-xs text-gray-500",
+//                   identityPreviewText: "text-sm",
+//                   identityPreviewEditButton: "text-blue-500 hover:underline",
+//                 },
+//                 layout: {
+//                   socialButtonsPlacement: "top",
+//                 },
+//               }}
+//               redirectUrl="/onboarding"
+//             />
+            
+//             {/* Toggle to Sign In */}
+//             <div className="text-center mt-4">
+//               <span className="text-xs text-gray-500">
+//                 Already have an account?{" "}
+//                 <button onClick={toggleMode} className="text-blue-500 hover:underline">
+//                   Sign in
+//                 </button>
+//               </span>
+//             </div>
+//           </div>
+//         )}
+//       </div>
 //     </div>
 //   );
 // };

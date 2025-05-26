@@ -106,3 +106,178 @@
   color: gray !important;
   margin-bottom: 5px;
 }
+
+
+/* Add this to your global CSS file (e.g., globals.css or styles.css) */
+
+/* Custom Clerk Styling */
+/* .cl-rootBox {
+  width: 100% !important;
+  max-width: 28rem !important;
+} */
+
+.cl-card {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  border: none !important;
+}
+
+/* Add SchooLama branding to the header */
+.cl-headerTitle::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.cl-headerTitle {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.cl-headerTitle::after {
+  content: 'SchooLama' !important;
+}
+
+/* Style the Google button to match your design */
+.cl-socialButtonsBlockButton[data-provider="google"] {
+  position: relative !important;
+}
+
+.cl-socialButtonsBlockButton[data-provider="google"]::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-image: url('https://developers.google.com/identity/images/g-logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 8px;
+}
+
+/* Ensure proper spacing and layout */
+.cl-socialButtonsBlockButtonText {
+  font-size: 14px !important;
+}
+
+/* Style form fields */
+.cl-formFieldInput {
+  transition: all 0.2s ease !important;
+}
+
+.cl-formFieldInput:focus {
+  outline: none !important;
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Style error messages */
+.cl-formFieldError,
+.cl-globalError {
+  margin-top: 4px !important;
+}
+
+/* Style the divider */
+.cl-dividerRow {
+  margin: 1rem 0 !important;
+}
+
+.cl-dividerLine {
+  height: 1px !important;
+}
+
+/* Style footer links */
+.cl-footerAction {
+  text-align: center !important;
+  margin-top: 1rem !important;
+}
+
+.cl-footerActionText {
+  font-size: 12px !important;
+  color: #6B7280 !important;
+}
+
+/* Button hover effects */
+.cl-formButtonPrimary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3) !important;
+}
+
+.cl-socialButtonsBlockButton:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Loading states */
+.cl-formButtonPrimary[data-loading="true"] {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+}
+
+/* Responsive adjustments
+@media (max-width: 640px) {
+  .cl-card {
+    padding: 2rem !important;
+    margin: 1rem !important;
+  }
+  
+  .cl-rootBox {
+    padding: 0 1rem !important;
+  }
+} */
+
+/* Custom background for auth pages */
+.auth-page-background {
+  background-color: #C3EBFA !important; /* lamaSkyLight equivalent */
+  min-height: 100vh !important;
+}
+
+/* Override any conflicting styles */
+/* .cl-internal-1w8se7f,
+.cl-internal-* {
+  box-sizing: border-box !important;
+} */
+
+/* Ensure proper text colors */
+.cl-card * {
+  color: inherit !important;
+}
+
+/* Style verification code inputs */
+.cl-formFieldInput[type="text"][inputmode="numeric"] {
+  text-align: center !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Style alternative methods */
+.cl-alternativeMethodsBlockButton {
+  margin-bottom: 0.5rem !important;
+}
+
+/* Custom scrollbar for any overflow */
+.cl-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cl-card::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.cl-card::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.cl-card::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

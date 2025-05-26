@@ -8,18 +8,20 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-   "dev": "next dev",
-   "build": "next build",
-   "start": "next start",
-   "lint": "next lint",
-   "heroku-postbuild": "next build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "heroku-postbuild": "next build"
   },
   "dependencies": {
+    "@clerk/backend": "^1.32.3",
     "@clerk/elements": "^0.14.6",
     "@clerk/nextjs": "^5.7.5",
     "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.19.1",
     "@types/react-big-calendar": "^1.8.9",
+    "micro": "^10.0.1",
     "moment": "^2.30.1",
     "next": "14.2.5",
     "next-cloudinary": "^6.16.0",
@@ -31,9 +33,11 @@
     "react-hook-form": "^7.52.2",
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.7",
+    "svix": "^1.66.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/node": "20.17.50",
     "@types/react": "18.3.21",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -41,8 +45,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "5.8.3",
-    "@types/node": "20.17.50"
+    "typescript": "5.8.3"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

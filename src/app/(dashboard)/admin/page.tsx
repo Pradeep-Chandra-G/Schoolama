@@ -4,8 +4,10 @@ import CountChartContainer from "@/components/CountChartContainer";
 import EventCalendarContainer from "@/components/EventCalendarContainer";
 import FinanceChart from "@/components/FinanceChart";
 import UserCard from "@/components/UserCard";
+import { auth } from "@clerk/nextjs/server";
 
 const AdminPage = ({
+  
   searchParams,
 }: {
   searchParams: { [keys: string]: string | undefined };
