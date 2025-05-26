@@ -1,54 +1,38 @@
-// pages/api/webhooks/clerk.ts
-
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { buffer } from 'micro';
+import { NextRequest, NextResponse } from 'next/server';
 import { Webhook } from 'svix';
-import type { WebhookEvent } from '@clerk/nextjs/server'; // Optional for type safety
+import type { WebhookEvent } from '@clerk/nextjs/server';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-const webhookSecret = process.env.CLERK_WEBHOOK_SECRET || '';
+export async function POST(req: NextRequest) {
+  const payload = await req.text(); // raw body as string
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
-  }
-
-  const payload = (await buffer(req)).toString('utf8');
-
-  // Normalize headers to strings (required by svix)
-  const headers = {
-    'svix-id': req.headers['svix-id'] as string,
-    'svix-timestamp': req.headers['svix-timestamp'] as string,
-    'svix-signature': req.headers['svix-signature'] as string,
+  const svixHeaders = {
+    'svix-id': req.headers.get('svix-id') ?? '',
+    'svix-timestamp': req.headers.get('svix-timestamp') ?? '',
+    'svix-signature': req.headers.get('svix-signature') ?? '',
   };
 
-  const wh = new Webhook(webhookSecret);
+  const webhookSecret = process.env.CLERK_WEBHOOK_SECRET || '';
+  const webhook = new Webhook(webhookSecret);
 
   let evt: WebhookEvent;
 
   try {
-    evt = wh.verify(payload, headers) as WebhookEvent;
+    evt = webhook.verify(payload, svixHeaders) as WebhookEvent;
   } catch (err) {
     console.error('❌ Webhook verification failed:', err);
-    return res.status(400).json({ error: 'Invalid webhook signature' });
+    return NextResponse.json({ error: 'Invalid webhook signature' }, { status: 400 });
   }
 
-  console.log('✅ Webhook received:', evt);
+  console.log('✅ Clerk Webhook event received:', evt);
 
-  // Handle event types
+  // Handle specific events
   if (evt.type === 'user.created') {
     const user = evt.data;
-    console.log('🎉 New Clerk user:', user);
-    // Save user to DB or trigger internal logic
+    console.log('🎉 New Clerk user created:', user);
   }
 
-  return res.status(200).json({ success: true });
+  return NextResponse.json({ success: true }, { status: 200 });
 }
