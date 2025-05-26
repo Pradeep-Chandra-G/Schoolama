@@ -15,8 +15,8 @@
     "heroku-postbuild": "next build"
   },
   "dependencies": {
+    "@clerk/elements": "^0.14.6",
     "@clerk/nextjs": "^5.7.5",
-     "@clerk/elements": "^0.14.6",
     "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.19.1",
     "@types/react-big-calendar": "^1.8.9",
@@ -32,8 +32,11 @@
     "react-hook-form": "^7.52.2",
     "react-toastify": "^10.0.5",
     "recharts": "^2.12.7",
-    "svix": "^1.66.0",
+    "svix": "^1.65.0",
     "zod": "^3.23.8"
+  },
+  "overrides": {
+    "@clerk/shared": "^3.9.3"
   },
   "devDependencies": {
     "@types/node": "20.17.50",
@@ -50,3 +53,4 @@
     "seed": "ts-node prisma/seed.ts"
   }
 }
+
