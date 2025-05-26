@@ -251,7 +251,7 @@ const SignUpPage = () => {
               className="text-blue-500 text-sm hover:underline mt-2"
               fallback={({ resendableAfter }) => (
                 <p className="text-sm text-gray-500 mt-2">
-                  Didn't receive a code? Resend in {resendableAfter} seconds
+                  Didn&apos;t receive a code? Resend in {resendableAfter} seconds
                 </p>
               )}
             >
