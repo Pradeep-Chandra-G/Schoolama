@@ -13,6 +13,12 @@ const menuItems = [
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
+        icon: "/AI.png",
+        label: "AI-LMS",
+        href: "https://schoolama-ai.vercel.app/",
+        visible: ["admin", "student"]
+      },
+      {
         icon: "/teacher.png",
         label: "Teachers",
         href: "/list/teachers",

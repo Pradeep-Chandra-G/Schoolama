@@ -8,11 +8,11 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-   "dev": "next dev",
-   "build": "next build",
-   "start": "next start",
-   "lint": "next lint",
-   "heroku-postbuild": "next build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "heroku-postbuild": "next build"
   },
   "dependencies": {
     "@clerk/elements": "^0.14.6",
@@ -34,6 +34,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/node": "20.17.50",
     "@types/react": "18.3.21",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -41,8 +42,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "5.8.3",
-    "@types/node": "20.17.50"
+    "typescript": "5.8.3"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
