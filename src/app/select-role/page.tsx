@@ -145,7 +145,10 @@ export default function SelectRolePage() {
     useEffect(() => {
         if (isLoaded && user?.publicMetadata?.role) {
             console.log('User already has role:', user.publicMetadata.role);
-            router.push(`/${user.publicMetadata.role}`);
+
+            setTimeout(() => {
+                router.replace(`/${user.publicMetadata.role}`);
+            }, 0);
         }
     }, [isLoaded, user, router]);
 
