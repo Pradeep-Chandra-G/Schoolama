@@ -16,7 +16,7 @@
 // //   console.log(sessionClaims)
 
 // //   const role = (sessionClaims?.metadata as { role?: string })?.role;
-  
+
 
 // //   for (const { matcher, allowedRoles } of matchers) {
 // //     if (matcher(req) && !allowedRoles.includes(role!)) {
@@ -52,7 +52,7 @@
 
 // // export default clerkMiddleware((auth, req) => {
 // //   const { userId, sessionClaims } = auth();
-  
+
 // //   // Allow public routes
 // //   if (isPublicRoute(req)) {
 // //     return NextResponse.next();
@@ -75,15 +75,15 @@
 // //   if (isAdminRoute(req) && role !== 'admin') {
 // //     return NextResponse.redirect(new URL(`/${role}`, req.url));
 // //   }
-  
+
 // //   if (isTeacherRoute(req) && role !== 'teacher') {
 // //     return NextResponse.redirect(new URL(`/${role}`, req.url));
 // //   }
-  
+
 // //   if (isStudentRoute(req) && role !== 'student') {
 // //     return NextResponse.redirect(new URL(`/${role}`, req.url));
 // //   }
-  
+
 // //   if (isParentRoute(req) && role !== 'parent') {
 // //     return NextResponse.redirect(new URL(`/${role}`, req.url));
 // //   }
@@ -124,7 +124,7 @@
 
 // export default clerkMiddleware(async (auth, req) => {
 //   const { userId, sessionClaims } = await auth();
-  
+
 //   // Allow public routes
 //   if (isPublicRoute(req)) {
 //     return NextResponse.next();
@@ -141,7 +141,7 @@
 //   const publicMetadata = sessionClaims?.publicMetadata as { role?: string } | undefined;
 //   const privateMetadata = sessionClaims?.metadata as { role?: string } | undefined;
 //   const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
-  
+
 //   const role = publicMetadata?.role || privateMetadata?.role || unsafeMetadata?.role;
 
 //   console.log("Extracted role:", role);
@@ -156,12 +156,12 @@
 //   for (const { matcher, allowedRoles } of matchers) {
 //     if (matcher(req)) {
 //       console.log(`Route matched, allowed roles: ${allowedRoles}, user role: ${role}`);
-      
+
 //       if (!allowedRoles.includes(role)) {
 //         console.log(`Access denied, redirecting to /${role}`);
 //         return NextResponse.redirect(new URL(`/${role}`, req.url));
 //       }
-      
+
 //       // If role is allowed, continue
 //       break;
 //     }
@@ -184,7 +184,7 @@ import { NextResponse } from "next/server";
 
 // Publicly accessible routes (don't require authentication)
 const isPublicRoute = createRouteMatcher([
-  '/sign-in(.*)', 
+  '/sign-in(.*)',
   '/sign-up(.*)',
   '/api(.*)',
   '/api/webhook(.*)',
@@ -203,8 +203,25 @@ export default clerkMiddleware(async (auth, req) => {
   const url = new URL(req.url);
 
   // Redirect unauthenticated users from `/` to `/sign-in`
-  if (url.pathname === '/' && !userId) {
-    return NextResponse.redirect(new URL('/sign-in', req.url));
+  if (url.pathname === '/') {
+    if (!userId) {
+      return NextResponse.redirect(new URL('/sign-in', req.url));
+    }
+
+    // Authenticated — get role and redirect
+    const publicMetadata = sessionClaims?.publicMetadata as { role?: string } | undefined;
+    const privateMetadata = sessionClaims?.metadata as { role?: string } | undefined;
+    const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
+
+    const role = publicMetadata?.role || privateMetadata?.role || unsafeMetadata?.role;
+
+    // If no role, send to sign-up or setup page
+    if (!role) {
+      return NextResponse.redirect(new URL('/sign-up', req.url));
+    }
+
+    // Redirect to /{role}
+    return NextResponse.redirect(new URL(`/${role}`, req.url));
   }
 
   // Allow public routes to proceed
@@ -223,7 +240,7 @@ export default clerkMiddleware(async (auth, req) => {
   const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
 
   const role = publicMetadata?.role || privateMetadata?.role || unsafeMetadata?.role;
-  
+
 
   // Redirect users without a role to sign-up or role selection
   if (!role) {
