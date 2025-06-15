@@ -1,4 +1,3 @@
-// // app/select-role/page.tsx (using server action)
 // "use client";
 
 // import { useUser } from '@clerk/nextjs';
@@ -17,7 +16,10 @@
 //     useEffect(() => {
 //         if (isLoaded && user?.publicMetadata?.role) {
 //             console.log('User already has role:', user.publicMetadata.role);
-//             router.push(`/${user.publicMetadata.role}`);
+
+//             setTimeout(() => {
+//                 router.replace(`/${user.publicMetadata.role}`);
+//             }, 0);
 //         }
 //     }, [isLoaded, user, router]);
 
@@ -126,13 +128,12 @@
 //     );
 // }
 
-// app/select-role/page.tsx
 "use client";
 
 import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { updateUserRole } from '@/app/actions/updateRole';
 
 export default function SelectRolePage() {
@@ -140,20 +141,19 @@ export default function SelectRolePage() {
     const router = useRouter();
     const [selectedRole, setSelectedRole] = useState<string>('');
     const [isUpdating, setIsUpdating] = useState(false);
+    const hasRedirected = useRef(false);
 
     // Check if user already has a role and redirect
     useEffect(() => {
-        if (isLoaded && user?.publicMetadata?.role) {
+        if (isLoaded && user?.publicMetadata?.role && !hasRedirected.current) {
+            hasRedirected.current = true;
             console.log('User already has role:', user.publicMetadata.role);
-
-            setTimeout(() => {
-                router.replace(`/${user.publicMetadata.role}`);
-            }, 0);
+            router.replace(`/${user.publicMetadata.role}`);
         }
-    }, [isLoaded, user, router]);
+    }, [isLoaded, user?.publicMetadata?.role, router]);
 
     const handleRoleSubmit = async () => {
-        if (!selectedRole || !user) return;
+        if (!selectedRole || !user || isUpdating) return;
 
         setIsUpdating(true);
 
@@ -167,7 +167,10 @@ export default function SelectRolePage() {
                 // Reload user data to get updated publicMetadata
                 await user.reload();
 
-                router.push(`/${selectedRole}`);
+                // Add a small delay to ensure metadata is updated
+                setTimeout(() => {
+                    router.push(`/${selectedRole}`);
+                }, 500);
             } else {
                 throw new Error(result.error || 'Failed to update role');
             }
@@ -175,6 +178,7 @@ export default function SelectRolePage() {
         } catch (error) {
             console.error("Failed to update user role:", error);
             alert('Failed to update role. Please try again.');
+        } finally {
             setIsUpdating(false);
         }
     };
@@ -186,14 +190,28 @@ export default function SelectRolePage() {
         { id: 'admin', label: 'Admin', icon: '⚙️', description: 'System administration' }
     ];
 
-    // Don't render if user is not loaded or already has a role
-    if (!isLoaded || user?.publicMetadata?.role) {
+    // Show loading while Clerk is initializing
+    if (!isLoaded) {
         return (
             <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
                 <div className="bg-white p-8 rounded-md shadow-lg">
                     <div className="flex items-center justify-center gap-2">
                         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
                         <span>Loading...</span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Show loading if user already has a role (redirecting)
+    if (user?.publicMetadata?.role) {
+        return (
+            <div className="h-screen flex items-center justify-center bg-lamaSkyLight">
+                <div className="bg-white p-8 rounded-md shadow-lg">
+                    <div className="flex items-center justify-center gap-2">
+                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+                        <span>Redirecting...</span>
                     </div>
                 </div>
             </div>
@@ -219,10 +237,11 @@ export default function SelectRolePage() {
                         <button
                             key={role.id}
                             onClick={() => setSelectedRole(role.id)}
+                            disabled={isUpdating}
                             className={`p-4 rounded-lg border-2 transition-all text-left ${selectedRole === role.id
-                                ? "border-blue-500 bg-blue-50 shadow-md"
-                                : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
-                                }`}
+                                    ? "border-blue-500 bg-blue-50 shadow-md"
+                                    : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                                } ${isUpdating ? "opacity-50 cursor-not-allowed" : ""}`}
                         >
                             <div className="flex items-center gap-3">
                                 <span className="text-2xl">{role.icon}</span>
@@ -239,8 +258,8 @@ export default function SelectRolePage() {
                     onClick={handleRoleSubmit}
                     disabled={!selectedRole || isUpdating}
                     className={`w-full py-3 px-4 rounded-md text-white font-medium transition-colors ${!selectedRole || isUpdating
-                        ? "bg-gray-300 cursor-not-allowed"
-                        : "bg-blue-500 hover:bg-blue-600"
+                            ? "bg-gray-300 cursor-not-allowed"
+                            : "bg-blue-500 hover:bg-blue-600"
                         }`}
                 >
                     {isUpdating ? (
