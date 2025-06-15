@@ -17,7 +17,7 @@ export default function SSOCallback() {
         setIsRedirecting(true);
 
         // Check if user has a role in metadata
-        const userRole = user.unsafeMetadata?.role as string;
+        const userRole = user.publicMetadata?.role as string;
 
         if (userRole && ['student', 'teacher', 'parent', 'admin'].includes(userRole)) {
             // User has a role, redirect to their dashboard

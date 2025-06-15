@@ -18,7 +18,7 @@ export default function SignUpSSOCallback() {
 
         // For new sign-ups via SSO, always redirect to role selection
         // since they haven't chosen a role yet
-        const userRole = user.unsafeMetadata?.role as string;
+        const userRole = user.publicMetadata?.role as string;
 
         if (userRole && ['student', 'teacher', 'parent', 'admin'].includes(userRole)) {
             // User already has a role (shouldn't happen for sign-up, but just in case)

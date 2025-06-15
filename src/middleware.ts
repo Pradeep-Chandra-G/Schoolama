@@ -178,89 +178,161 @@
 //     "/(api|trpc)(.*)",
 //   ],
 // };
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { routeAccessMap } from "./lib/settings";
-import { NextResponse } from "next/server";
 
-// Publicly accessible routes (don't require authentication)
+
+// import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+// import { routeAccessMap } from "./lib/settings";
+// import { NextResponse } from "next/server";
+
+// // Publicly accessible routes (don't require authentication)
+// const isPublicRoute = createRouteMatcher([
+//   '/sign-in(.*)',
+//   '/sign-up(.*)',
+//   '/api(.*)',
+//   '/api/webhook(.*)',
+//   '/api/public(.*)'
+// ]);
+
+// // Map of route permissions based on role
+// const matchers = Object.keys(routeAccessMap).map((route) => ({
+//   matcher: createRouteMatcher([route]),
+//   allowedRoles: routeAccessMap[route],
+// }));
+
+// export default clerkMiddleware(async (auth, req) => {
+//   const { userId, sessionClaims } = await auth();
+
+//   const url = new URL(req.url);
+
+//   // Redirect unauthenticated users from `/` to `/sign-in`
+//   if (url.pathname === '/') {
+//     if (!userId) {
+//       return NextResponse.redirect(new URL('/sign-in', req.url));
+//     }
+
+//     // Authenticated — get role and redirect
+//     const publicMetadata = sessionClaims?.publicMetadata as { role?: string } | undefined;
+//     const privateMetadata = sessionClaims?.metadata as { role?: string } | undefined;
+//     const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
+
+//     const role = publicMetadata?.role || privateMetadata?.role || unsafeMetadata?.role;
+
+//     // If no role, send to sign-up or setup page
+//     if (!role) {
+//       return NextResponse.redirect(new URL('/sign-up', req.url));
+//     }
+
+//     // Redirect to /{role}
+//     return NextResponse.redirect(new URL(`/${role}`, req.url));
+//   }
+
+//   // Allow public routes to proceed
+//   if (isPublicRoute(req)) {
+//     return NextResponse.next();
+//   }
+
+//   // Redirect unauthenticated users to sign-in
+//   if (!userId) {
+//     return NextResponse.redirect(new URL('/sign-in', req.url));
+//   }
+
+//   // Extract user role from various Clerk metadata sources
+//   const publicMetadata = sessionClaims?.publicMetadata as { role?: string } | undefined;
+//   const privateMetadata = sessionClaims?.metadata as { role?: string } | undefined;
+//   const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
+
+//   const role = publicMetadata?.role || privateMetadata?.role || unsafeMetadata?.role;
+
+
+//   // Redirect users without a role to sign-up or role selection
+//   if (!role) {
+//     return NextResponse.redirect(new URL('/sign-up', req.url));
+//   }
+
+//   // Enforce role-based access control for defined routes
+//   for (const { matcher, allowedRoles } of matchers) {
+//     if (matcher(req) && !allowedRoles.includes(role)) {
+//       return NextResponse.redirect(new URL(`/${role}`, req.url));
+//     }
+//   }
+
+//   return NextResponse.next();
+// });
+
+// export const config = {
+//   matcher: [
+//     // Skip Next.js internals and static files
+//     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+//     "/(api|trpc)(.*)",
+//   ],
+// };
+
+
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
+
 const isPublicRoute = createRouteMatcher([
+  '/',
   '/sign-in(.*)',
   '/sign-up(.*)',
-  '/api(.*)',
-  '/api/webhook(.*)',
-  '/api/public(.*)'
+  '/select-role'
 ]);
 
-// Map of route permissions based on role
-const matchers = Object.keys(routeAccessMap).map((route) => ({
-  matcher: createRouteMatcher([route]),
-  allowedRoles: routeAccessMap[route],
-}));
+const roleRoutes = {
+  student: ['/student(.*)'],
+  teacher: ['/teacher(.*)'],
+  parent: ['/parent(.*)'],
+  admin: ['/admin(.*)']
+};
 
-export default clerkMiddleware(async (auth, req) => {
-  const { userId, sessionClaims } = await auth();
-
-  const url = new URL(req.url);
-
-  // Redirect unauthenticated users from `/` to `/sign-in`
-  if (url.pathname === '/') {
-    if (!userId) {
-      return NextResponse.redirect(new URL('/sign-in', req.url));
-    }
-
-    // Authenticated — get role and redirect
-    const publicMetadata = sessionClaims?.publicMetadata as { role?: string } | undefined;
-    const privateMetadata = sessionClaims?.metadata as { role?: string } | undefined;
-    const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
-
-    const role = publicMetadata?.role || privateMetadata?.role || unsafeMetadata?.role;
-
-    // If no role, send to sign-up or setup page
-    if (!role) {
-      return NextResponse.redirect(new URL('/sign-up', req.url));
-    }
-
-    // Redirect to /{role}
-    return NextResponse.redirect(new URL(`/${role}`, req.url));
-  }
-
-  // Allow public routes to proceed
+export default clerkMiddleware((auth, req) => {
+  // Allow public routes
   if (isPublicRoute(req)) {
     return NextResponse.next();
   }
 
-  // Redirect unauthenticated users to sign-in
+  // Get auth info
+  const { userId, sessionClaims } = auth();
+
+  // Redirect to sign-in if not authenticated
   if (!userId) {
     return NextResponse.redirect(new URL('/sign-in', req.url));
   }
 
-  // Extract user role from various Clerk metadata sources
-  const publicMetadata = sessionClaims?.publicMetadata as { role?: string } | undefined;
-  const privateMetadata = sessionClaims?.metadata as { role?: string } | undefined;
-  const unsafeMetadata = sessionClaims?.unsafeMetadata as { role?: string } | undefined;
+  // Get user role from public metadata (note: it's nested under 'metadata')
+  const userRole = (sessionClaims?.metadata as any)?.role as string;
 
-  const role = publicMetadata?.role || privateMetadata?.role || unsafeMetadata?.role;
-
-
-  // Redirect users without a role to sign-up or role selection
-  if (!role) {
-    return NextResponse.redirect(new URL('/sign-up', req.url));
+  // If no role is set, redirect to role selection
+  if (!userRole) {
+    return NextResponse.redirect(new URL('/select-role', req.url));
   }
 
-  // Enforce role-based access control for defined routes
-  for (const { matcher, allowedRoles } of matchers) {
-    if (matcher(req) && !allowedRoles.includes(role)) {
-      return NextResponse.redirect(new URL(`/${role}`, req.url));
+  // Check if user is trying to access a role-specific route
+  const pathname = req.nextUrl.pathname;
+
+  // Check if user is accessing the correct role route
+  for (const [role, routes] of Object.entries(roleRoutes)) {
+    for (const route of routes) {
+      const routeMatcher = createRouteMatcher([route]);
+      if (routeMatcher(req)) {
+        if (userRole !== role) {
+          // User is trying to access a route they don't have permission for
+          return NextResponse.redirect(new URL(`/${userRole}`, req.url));
+        }
+        // User has correct role, allow access
+        return NextResponse.next();
+      }
     }
   }
 
-  return NextResponse.next();
+  // If we get here, user is authenticated with a role but accessing an unknown route
+  // Redirect to their role dashboard
+  return NextResponse.redirect(new URL(`/${userRole}`, req.url));
 });
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and static files
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/(api|trpc)(.*)',
   ],
 };
