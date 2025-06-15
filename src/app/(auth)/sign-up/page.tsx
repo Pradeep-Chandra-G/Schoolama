@@ -298,21 +298,22 @@ const SignUpPage = () => {
   const [metadataUpdated, setMetadataUpdated] = useState(false);
 
   useEffect(() => {
-    // Only run this effect for users who completed the full sign-up flow
-    // (not SSO users who are redirected here)
     if (!isLoaded || !isSignedIn || !user) return;
     if (metadataUpdated) return;
 
-    // Check if user came from SSO (they would have emailAddresses but no password)
-    const isSSO = user.passwordEnabled === false;
+    // Check multiple indicators for SSO users
+    const hasExternalAccount = user.externalAccounts && user.externalAccounts.length > 0;
+    const isContinueFromSSO = window.location.hash === '#/continue' && hasExternalAccount;
+    const isPasswordDisabled = user.passwordEnabled === false;
 
-    if (isSSO) {
-      // SSO users should go through role selection page
-      router.push('/select-role');
+    // If any SSO indicators are true, redirect to role selection
+    if (hasExternalAccount || isContinueFromSSO || isPasswordDisabled) {
+      console.log('SSO user detected, redirecting to role selection');
+      router.replace('/select-role');
       return;
     }
 
-    // For regular sign-up users, update metadata with selected role
+    // Your existing logic for regular email/password users
     const currentRole = user.unsafeMetadata?.role as string;
 
     if (currentRole !== selectedRole) {
@@ -392,8 +393,8 @@ const SignUpPage = () => {
                   type="button"
                   onClick={() => setSelectedRole(role)}
                   className={`p-2 text-xs rounded-md border transition-colors ${selectedRole === role
-                      ? "bg-blue-500 text-white border-blue-500"
-                      : "bg-gray-50 text-gray-700 border-gray-300 hover:bg-gray-100"
+                    ? "bg-blue-500 text-white border-blue-500"
+                    : "bg-gray-50 text-gray-700 border-gray-300 hover:bg-gray-100"
                     }`}
                 >
                   {role.charAt(0).toUpperCase() + role.slice(1)}
