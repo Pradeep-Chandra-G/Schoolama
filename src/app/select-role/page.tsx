@@ -239,8 +239,8 @@ export default function SelectRolePage() {
                             onClick={() => setSelectedRole(role.id)}
                             disabled={isUpdating}
                             className={`p-4 rounded-lg border-2 transition-all text-left ${selectedRole === role.id
-                                    ? "border-blue-500 bg-blue-50 shadow-md"
-                                    : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                                ? "border-blue-500 bg-blue-50 shadow-md"
+                                : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                                 } ${isUpdating ? "opacity-50 cursor-not-allowed" : ""}`}
                         >
                             <div className="flex items-center gap-3">
@@ -258,8 +258,8 @@ export default function SelectRolePage() {
                     onClick={handleRoleSubmit}
                     disabled={!selectedRole || isUpdating}
                     className={`w-full py-3 px-4 rounded-md text-white font-medium transition-colors ${!selectedRole || isUpdating
-                            ? "bg-gray-300 cursor-not-allowed"
-                            : "bg-blue-500 hover:bg-blue-600"
+                        ? "bg-gray-300 cursor-not-allowed"
+                        : "bg-blue-500 hover:bg-blue-600"
                         }`}
                 >
                     {isUpdating ? (
