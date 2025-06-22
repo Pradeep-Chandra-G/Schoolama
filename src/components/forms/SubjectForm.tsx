@@ -40,8 +40,8 @@ const SubjectForm = ({
   );
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    formAction(data);
+    // console.log(data);
+    // formAction(data);
   });
 
   const router = useRouter();

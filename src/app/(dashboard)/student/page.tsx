@@ -14,7 +14,7 @@ const StudentPage = async () => {
     },
   });
 
-  console.log(classItem);
+  // console.log(classItem);
   return (
     <div className="p-4 flex gap-4 flex-col xl:flex-row">
       {/* LEFT */}
