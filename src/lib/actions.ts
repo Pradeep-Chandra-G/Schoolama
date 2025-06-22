@@ -5,6 +5,7 @@ import {
   ClassSchema,
   ExamSchema,
   StudentSchema,
+  ParentSchema,
   SubjectSchema,
   TeacherSchema,
 } from "./formValidationSchemas";
@@ -372,6 +373,199 @@ export const deleteStudent = async (
   } catch (err) {
     console.log(err);
     return { success: false, error: true };
+  }
+};
+
+export const createParent = async (
+  currentState: CurrentState,
+  data: ParentSchema
+) => {
+  console.log(data);
+  try {
+    // Create user in Clerk
+    const user = await clerkClient.users.createUser({
+      username: data.username,
+      password: data.password,
+      firstName: data.name,
+      lastName: data.surname,
+      emailAddress: data.email ? [data.email] : undefined,
+      publicMetadata: { role: "parent" }
+    });
+
+    // Create parent in database
+    await prisma.parent.create({
+      data: {
+        id: user.id,
+        username: data.username,
+        name: data.name,
+        surname: data.surname,
+        email: data.email || null,
+        phone: data.phone,
+        address: data.address,
+        students: undefined
+      },
+    });
+
+    // If studentId is provided, update the student's parentId
+    if (data.studentId && data.studentId !== "") {
+      await prisma.student.update({
+        where: { id: data.studentId },
+        data: { parentId: user.id },
+      });
+    }
+
+    // revalidatePath("/list/parents");
+    return { success: true, error: false };
+  } catch (err: any) {
+    console.error('Create parent error:', err);
+
+    // Clerk error with detailed info
+    if (err.clerkError && err.errors?.length) {
+      return { success: false, error: err.errors[0].message };
+    }
+
+    return { success: false, error: 'Unexpected server error' };
+  }
+};
+
+export const updateParent = async (
+  currentState: CurrentState,
+  data: ParentSchema
+) => {
+  if (!data.id) {
+    return { success: false, error: "Parent ID is required" };
+  }
+
+  try {
+    // Prepare user update data
+    const userUpdateData: any = {
+      username: data.username,
+      firstName: data.name,
+      lastName: data.surname,
+    };
+
+    // Add password if provided
+    if (data.password !== "") {
+      userUpdateData.password = data.password;
+    }
+
+    // Handle email update separately if provided
+    if (data.email) {
+      // First get the current user to check existing email addresses
+      const currentUser = await clerkClient.users.getUser(data.id);
+
+      // Check if email already exists
+      const existingEmail = currentUser.emailAddresses.find(
+        email => email.emailAddress === data.email
+      );
+
+      if (existingEmail) {
+        // If email exists, set it as primary
+        userUpdateData.primaryEmailAddressId = existingEmail.id;
+      } else {
+        // If email doesn't exist, create new email address
+        const newEmail = await clerkClient.emailAddresses.createEmailAddress({
+          userId: data.id,
+          emailAddress: data.email,
+          verified: false, // Set to true if you want to skip verification
+        });
+        userUpdateData.primaryEmailAddressId = newEmail.id;
+      }
+    }
+
+    // Update user in Clerk
+    const user = await clerkClient.users.updateUser(data.id, userUpdateData);
+
+    // Rest of your code remains the same...
+    await prisma.parent.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        username: data.username,
+        name: data.name,
+        surname: data.surname,
+        email: data.email || null,
+        phone: data.phone,
+        address: data.address,
+      },
+    });
+
+    // Handle student relationship updates
+    if (data.studentId && data.studentId !== "") {
+      await prisma.student.updateMany({
+        where: { parentId: data.id },
+        data: { parentId: undefined },
+      });
+
+      await prisma.student.update({
+        where: { id: data.studentId },
+        data: { parentId: data.id },
+      });
+    } else {
+      await prisma.student.updateMany({
+        where: { parentId: data.id },
+        data: { parentId: undefined },
+      });
+    }
+
+    return { success: true, error: false };
+  } catch (err: any) {
+    console.error('Update parent error:', err);
+
+    if (err.clerkError && err.errors?.length) {
+      return { success: false, error: err.errors[0].message };
+    }
+
+    return { success: false, error: 'Unexpected server error' };
+  }
+};
+
+export const deleteParent = async (
+  currentState: CurrentState,
+  data: FormData
+) => {
+  const id = data.get("id") as string;
+
+  try {
+    // Check if parent has any students before deleting
+    const parentWithStudents = await prisma.parent.findUnique({
+      where: { id },
+      include: {
+        students: {
+          select: { id: true }
+        }
+      },
+    });
+
+    if (parentWithStudents?.students.length && parentWithStudents.students.length > 0) {
+      return {
+        success: false,
+        error: "Cannot delete parent with existing students. Please reassign or remove students first."
+      };
+    }
+
+    // Delete from Clerk first
+    await clerkClient.users.deleteUser(id);
+
+    // Delete from database
+    await prisma.parent.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    // revalidatePath("/list/parents");
+    return { success: true, error: false };
+  } catch (err: any) {
+    console.error('Delete parent error:', err);
+
+    // Clerk error with detailed info
+    if (err.clerkError && err.errors?.length) {
+      return { success: false, error: err.errors[0].message };
+    }
+
+    return { success: false, error: 'Unexpected server error' };
   }
 };
 
