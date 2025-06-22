@@ -7,7 +7,7 @@ import { auth } from "@clerk/nextjs/server";
 const ParentPage = async () => {
   const { userId } = auth();
   const currentUserId = userId;
-  
+
   const students = await prisma.student.findMany({
     where: {
       parentId: currentUserId!,
@@ -15,7 +15,7 @@ const ParentPage = async () => {
   });
 
   return (
-    <div className="flex-1 p-4 flex gap-4 flex-col xl:flex-row">
+    <div className="p-4 flex gap-4 flex-col xl:flex-row">
       {/* LEFT */}
       <div className="">
         {students.map((student) => (
