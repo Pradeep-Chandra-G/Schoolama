@@ -147,7 +147,7 @@ export const createTeacher = async (
       password: data.password,
       firstName: data.name,
       lastName: data.surname,
-      publicMetadata:{role:"teacher"}
+      publicMetadata: { role: "teacher" }
     });
 
     await prisma.teacher.create({
@@ -173,9 +173,15 @@ export const createTeacher = async (
 
     // revalidatePath("/list/teachers");
     return { success: true, error: false };
-  } catch (err) {
-    console.log(err);
-    return { success: false, error: true };
+  } catch (err: any) {
+    console.error('Create teacher error:', err)
+
+    // Clerk error with detailed info
+    if (err.clerkError && err.errors?.length) {
+      return { success: false, error: err.errors[0].message }
+    }
+
+    return { success: false, error: 'Unexpected server error' };
   }
 };
 
@@ -267,7 +273,7 @@ export const createStudent = async (
       password: data.password,
       firstName: data.name,
       lastName: data.surname,
-      publicMetadata:{role:"student"}
+      publicMetadata: { role: "student" }
     });
 
     await prisma.student.create({
@@ -291,9 +297,15 @@ export const createStudent = async (
 
     // revalidatePath("/list/students");
     return { success: true, error: false };
-  } catch (err) {
-    console.log(err);
-    return { success: false, error: true };
+  } catch (err: any) {
+    console.error('Create student error:', err)
+
+    // Clerk error with detailed info
+    if (err.clerkError && err.errors?.length) {
+      return { success: false, error: err.errors[0].message }
+    }
+
+    return { success: false, error: 'Unexpected server error' }
   }
 };
 
