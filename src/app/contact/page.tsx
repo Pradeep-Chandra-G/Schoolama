@@ -205,8 +205,9 @@ export default function ContactPage() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-              Ready to transform your educational institution? Let's discuss how
-              Schoolama AI LMS can revolutionize your school management.
+              Ready to transform your educational institution? Let&apos;s
+              discuss how Schoolama AI LMS can revolutionize your school
+              management.
             </p>
           </div>
         </div>
@@ -221,12 +222,12 @@ export default function ContactPage() {
               <div className="space-y-8">
                 <div>
                   <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                    Let's Start a Conversation
+                    Let&apos;s Start a Conversation
                   </h2>
                   <p className="text-lg text-gray-600 mb-8">
-                    We're here to help you discover how our AI-powered LMS can
-                    transform your educational institution. Reach out to us and
-                    let's discuss your specific needs.
+                    We&apos;re here to help you discover how our AI-powered LMS
+                    can transform your educational institution. Reach out to us
+                    and let&apos;s discuss your specific needs.
                   </p>
                 </div>
 
@@ -325,7 +326,7 @@ export default function ContactPage() {
                       </p>
                     </div>
                     <p className="text-green-600 mt-1">
-                      We'll get back to you within 24 hours.
+                      We&apos;ll get back to you within 24 hours.
                     </p>
                   </div>
                 )}
@@ -492,8 +493,8 @@ export default function ContactPage() {
             Ready to Get Started?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            Don't wait to transform your educational institution. Start your
-            free trial today!
+            Don&apos;t wait to transform your educational institution. Start
+            your free trial today!
           </p>
           <Link
             href="https://schoolama-ai.vercel.app"

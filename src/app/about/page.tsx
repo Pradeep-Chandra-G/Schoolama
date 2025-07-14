@@ -302,7 +302,7 @@ export default function AboutPage() {
                     AI-powered learning accessible to everyone, everywhere. We
                     believe that every learner deserves an education tailored to
                     their unique needs, learning style, and pace. Through
-                    innovative technology and human-centered design, we're
+                    innovative technology and human-centered design, we&apos;re
                     breaking down barriers to learning and empowering educators
                     to achieve unprecedented outcomes.
                   </p>
@@ -611,7 +611,7 @@ export default function AboutPage() {
               </div>
               <p className="text-gray-400 leading-relaxed">
                 Transforming education through innovative AI-powered learning
-                experiences that adapt to every learner's needs.
+                experiences that adapt to every learner&apos;s needs.
               </p>
             </div>
             <div>
