@@ -415,7 +415,7 @@ export default function HomePage() {
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Setup Time</span>
                     <span className="font-semibold text-green-600">
-                      {"< 24 hours"}
+                      &lt; 24 hours
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
@@ -450,7 +450,7 @@ export default function HomePage() {
               Simple, Transparent Pricing
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose the perfect plan for your institution's needs
+              Choose the perfect plan for your institution&apos;s needs
             </p>
           </div>
 
