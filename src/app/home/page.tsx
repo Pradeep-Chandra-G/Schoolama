@@ -37,6 +37,18 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100); // delay to ensure layout is ready
+      }
+    }
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -142,8 +154,15 @@ export default function HomePage() {
           transform: translateY(-5px);
         }
 
+        .hover-glow {
+          box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* No shadow by default */
+          transition: box-shadow 0.3s ease;
+        }
+
         .hover-glow:hover {
-          box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+          box-shadow: 0 0 5px rgba(255, 255, 255, 0.6),
+            0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 40px rgba(255, 255, 255, 0.9);
         }
 
         .text-gradient {
@@ -552,9 +571,12 @@ export default function HomePage() {
                     development
                   </li>
                 </ul>
-                <button className="w-full border-2 border-indigo-500 text-indigo-500 py-3 px-6 rounded-full font-semibold hover:bg-indigo-500 hover:text-white transition-all duration-300">
+                <Link
+                  href="/contact"
+                  className="w-full border-2 border-indigo-500 text-indigo-500 py-3 px-6 rounded-full font-semibold hover:bg-indigo-500 hover:text-white transition-all duration-300"
+                >
                   Contact Sales
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -562,7 +584,10 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-indigo-500 to-pink-500">
+      <section
+        id="contact"
+        className="py-20 bg-gradient-to-r from-indigo-500 to-pink-500"
+      >
         <div className="container mx-auto px-6 text-center text-white">
           <div className="animate-on-scroll">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -580,9 +605,9 @@ export default function HomePage() {
               >
                 🚀 Start Free Trial Now
               </Link>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-500 transition-all duration-300">
+              <Link href="/contact" className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-500 transition-all duration-300">
                 Schedule Demo
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -644,9 +669,12 @@ export default function HomePage() {
                   </button>
                 </li>
                 <li>
-                  <button className="hover:text-white transition-colors">
+                  <Link
+                    href="/contact"
+                    className="hover:text-white transition-colors"
+                  >
                     Contact
-                  </button>
+                  </Link>
                 </li>
                 <li>
                   <button className="hover:text-white transition-colors">
@@ -664,9 +692,12 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <button className="hover:text-white transition-colors">
+                  <Link
+                    href="/about"
+                    className="hover:text-white transition-colors"
+                  >
                     About
-                  </button>
+                  </Link>
                 </li>
                 <li>
                   <button className="hover:text-white transition-colors">
