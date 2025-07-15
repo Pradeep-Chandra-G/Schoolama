@@ -13,7 +13,8 @@ export const metadata: Metadata = {
     "SchooLama is a free AI-powered LMS built for intelligent learning and education management. Start your trial today and experience smart analytics, personalized content, and streamlined course creation for modern educators.",
   openGraph: {
     title: "SchooLama - AI-Powered Learning Management System",
-    description: "Experience intelligent learning with AI-powered features, analytics, and free LMS tools. Get started with your trial today!",
+    description:
+      "Experience intelligent learning with AI-powered features, analytics, and free LMS tools. Get started with your trial today!",
     url: "https://www.schoolama.studio",
     siteName: "SchooLama",
     images: [
@@ -26,8 +27,12 @@ export const metadata: Metadata = {
     ],
     type: "website",
   },
-}
-
+  robots: {
+    index: true, // 👈 Ensure this is true
+    follow: true,
+    nocache: false,
+  },
+};
 
 export default function RootLayout({
   children,
