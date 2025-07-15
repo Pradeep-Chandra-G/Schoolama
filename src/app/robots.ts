@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/list/', 'parent', 'student', 'teacher', '/api'], // add your private routes here
+        disallow: ['/admin/', '/list/', '/parent', '/student', '/teacher', '/api'], // add your private routes here
       },
     ],
     sitemap: 'https://www.schoolama.studio/sitemap.xml',
