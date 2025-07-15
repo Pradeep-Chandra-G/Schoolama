@@ -238,11 +238,11 @@ export default function ContactPage() {
                       <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center">
                         <span className="text-white text-xl">📧</span>
                       </div>
-                      <div>
+                      <div className="text-wrap">
                         <h3 className="text-xl font-semibold text-gray-800">
                           Email Us
                         </h3>
-                        <p className="text-gray-600 text-wrap">
+                        <p className="text-gray-600">
                           pradeepchandragajendra@schoolama.studio
                         </p>
                       </div>
