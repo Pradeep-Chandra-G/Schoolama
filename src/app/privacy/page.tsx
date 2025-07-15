@@ -587,7 +587,7 @@ export default function PrivacyPolicyPage(): JSX.Element {
                 <div className="flex items-center space-x-3 mb-6">
                   <span className="text-3xl">👶</span>
                   <h2 className="text-3xl font-bold text-gray-800">
-                    Children's Privacy
+                    Children&apos;s Privacy
                   </h2>
                 </div>
                 <div className="space-y-6">
@@ -596,8 +596,8 @@ export default function PrivacyPolicyPage(): JSX.Element {
                       COPPA Compliance
                     </h3>
                     <p className="text-green-700">
-                      We comply with the Children's Online Privacy Protection
-                      Act (COPPA) and similar regulations.
+                      We comply with the Children&apos;s Online Privacy
+                      Protection Act (COPPA) and similar regulations.
                     </p>
                   </div>
 

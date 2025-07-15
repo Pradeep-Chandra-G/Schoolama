@@ -605,7 +605,10 @@ export default function HomePage() {
               >
                 🚀 Start Free Trial Now
               </Link>
-              <Link href="/contact" className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-500 transition-all duration-300">
+              <Link
+                href="/contact"
+                className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-500 transition-all duration-300"
+              >
                 Schedule Demo
               </Link>
             </div>
@@ -614,7 +617,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
+      <footer className="bg-black text-white py-12">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -705,12 +708,18 @@ export default function HomePage() {
                   </button>
                 </li>
                 <li>
-                  <button className="hover:text-white transition-colors">
+                  <Link
+                    href="/careers"
+                    className="hover:text-white transition-colors"
+                  >
                     Careers
-                  </button>
+                  </Link>
                 </li>
                 <li>
-                  <Link  href="/privacy" className="hover:text-white transition-colors">
+                  <Link
+                    href="/privacy"
+                    className="hover:text-white transition-colors"
+                  >
                     Privacy
                   </Link>
                 </li>
