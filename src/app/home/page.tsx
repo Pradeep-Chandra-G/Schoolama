@@ -710,9 +710,9 @@ export default function HomePage() {
                   </button>
                 </li>
                 <li>
-                  <button className="hover:text-white transition-colors">
+                  <Link  href="/privacy" className="hover:text-white transition-colors">
                     Privacy
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </div>

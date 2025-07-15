@@ -244,7 +244,8 @@ export default function AboutPage() {
                 Sign In
               </Link>
               <Link
-                href="/sign-up"
+                href="https://schoolama-ai.vercel.app"
+                target="_blank"
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-xl hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-medium"
               >
                 Get Started
