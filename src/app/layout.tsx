@@ -8,8 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SchooLama",
-  description: "Next.js School Management System",
+  title: "SchooLama AI LMS",
+  description:
+    "SchooLama is an AI-powered Learning Management System designed to make education smarter, faster, and more personalized. Create, manage, and scale engaging courses with ease — built for educators, teams, and institutions.",
+  alternates: {
+    canonical: "https://www.schoolama.studio",
+  },
 };
 
 export default function RootLayout({
