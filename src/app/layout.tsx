@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "SchooLama AI LMS",
   description:
-    "SchooLama is an AI-powered Learning Management System designed to make education smarter, faster, and more personalized. Create, manage, and scale engaging courses with ease — built for educators, teams, and institutions.",
+    "SchooLama is a free AI-powered LMS built for intelligent learning and education management. Start your trial today and experience smart analytics, personalized content, and streamlined course creation for modern educators.",
   alternates: {
     canonical: "https://www.schoolama.studio",
   },
