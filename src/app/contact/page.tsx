@@ -198,7 +198,7 @@ export default function ContactPage() {
 
         <div className="container mx-auto px-6 text-center text-white relative z-10">
           <div className="animate-slide-up">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl mt-20 md:text-6xl font-bold mb-6">
               Get in Touch with
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">
                 Our Expert Team
@@ -242,7 +242,7 @@ export default function ContactPage() {
                         <h3 className="text-xl font-semibold text-gray-800">
                           Email Us
                         </h3>
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 text-wrap">
                           pradeepchandragajendra@schoolama.studio
                         </p>
                       </div>
