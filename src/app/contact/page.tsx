@@ -234,11 +234,11 @@ export default function ContactPage() {
                 {/* Contact Cards */}
                 <div className="space-y-6">
                   <div className="card-hover bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl">
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 text-wrap">
                       <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center">
                         <span className="text-white text-xl">📧</span>
                       </div>
-                      <div className="text-wrap">
+                      <div>
                         <h3 className="text-xl font-semibold text-gray-800">
                           Email Us
                         </h3>
