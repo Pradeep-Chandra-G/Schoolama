@@ -584,7 +584,7 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/sign-up"
+              href="https://schoolama-ai.vercel.app/sign-up"
               className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all transform hover:-translate-y-1 hover:shadow-lg"
             >
               Get Started Free
