@@ -10,22 +10,29 @@ const matchers = Object.keys(routeAccessMap).map((route) => ({
 // console.log(matchers);
 
 export default clerkMiddleware(async (auth, req) => {
-  // if (isProtectedRoute(req)) auth().protect()
-
   const { sessionClaims } = await auth();
-  // console.log(sessionClaims)
 
   const role =
     sessionClaims?.role ??
     (sessionClaims?.publicMetadata as any)?.role ??
     (sessionClaims?.metadata as any)?.role;
 
-
   for (const { matcher, allowedRoles } of matchers) {
-    if (matcher(req) && !allowedRoles.includes(role!)) {
-      return NextResponse.redirect(new URL(`/${role}`, req.url));
+    // If the request matches and it's not a public route (i.e., roles are specified)
+    if (matcher(req)) {
+      if (allowedRoles.length === 0) {
+        // Public route, no auth needed — skip
+        return NextResponse.next();
+      }
+
+      if (!role || !allowedRoles.includes(role)) {
+        // If role is missing or not allowed, redirect
+        return NextResponse.redirect(new URL("/sign-in", req.url)); // or any fallback route
+      }
     }
   }
+
+  return NextResponse.next();
 });
 
 export const config = {
