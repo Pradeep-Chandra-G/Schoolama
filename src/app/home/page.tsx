@@ -703,9 +703,13 @@ export default function HomePage() {
                   </Link>
                 </li>
                 <li>
-                  <button className="hover:text-white transition-colors">
+                  <Link
+                    href="https://schoolama-blog-frontend-030bedd2be82.herokuapp.com/"
+                    target="_blank"
+                    className="hover:text-white transition-colors"
+                  >
                     Blog
-                  </button>
+                  </Link>
                 </li>
                 <li>
                   <Link
