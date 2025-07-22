@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ChevronRight, Calendar, User, ArrowRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 export default function BlogPage() {
   const [isScrolled, setIsScrolled] = useState(false);
