@@ -110,7 +110,7 @@ export default function DocsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
       <style jsx>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
@@ -220,6 +220,10 @@ export default function DocsPage() {
           .section-padding {
             padding: 1rem;
           }
+            .section-padding {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
         }
       `}</style>
 
@@ -330,15 +334,15 @@ export default function DocsPage() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 md:ml-80">
+        <main className="flex-1 md:ml-80 overflow-hidden">
           <div className="max-w-4xl mx-auto sm:px-6 py-8">
             {/* Hero Section */}
             <section className="mb-16 animate-on-scroll">
               <div className="text-center mb-12">
-                <h1 className="hero-title text-5xl md:text-6xl font-bold mb-6 gradient-text">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 gradient-text break-words">
                   Documentation
                 </h1>
-                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-4">
                   Complete guide to integrating and using Schoolama AI LMS. 
                   From quick setup to advanced features.
                 </p>
