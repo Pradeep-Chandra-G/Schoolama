@@ -213,16 +213,22 @@ export default function DocsPage() {
         }
         */
         /* Mobile responsive improvements */
-        @media (max-width: 768px) {
-          .hero-title {
-            font-size: 2.5rem;
-          }
-          .section-padding {
-            padding: 1rem;
-          }
-            .section-padding {
+        .section-padding {
   word-wrap: break-word;
   overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .section-padding {
+    padding: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
 }
         }
       `}</style>
