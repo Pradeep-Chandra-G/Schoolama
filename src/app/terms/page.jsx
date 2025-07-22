@@ -300,7 +300,7 @@ export default function TermsPage() {
                   </h2>
                   <div className="prose prose-lg text-gray-600 space-y-4">
                     <p>
-                      By accessing or using the Schoolama AI Learning Management System ("Service"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use our Service.
+                      By accessing or using the Schoolama AI Learning Management System (&quot;Service&quot;), you agree to be bound by these Terms and Conditions (&quot;Terms&quot;). If you do not agree to these Terms, please do not use our Service.
                     </p>
                     <p>
                       These Terms constitute a legally binding agreement between you and Schoolama AI LMS regarding your use of our platform and services.
@@ -317,11 +317,11 @@ export default function TermsPage() {
                   <div className="prose prose-lg text-gray-600 space-y-4">
                     <p>For the purposes of these Terms:</p>
                     <ul className="list-disc pl-6 space-y-2">
-                      <li><strong>"Service"</strong> refers to the Schoolama AI LMS platform and all related services</li>
-                      <li><strong>"User"</strong> means any individual or entity using our Service</li>
-                      <li><strong>"Institution"</strong> refers to educational organizations using our platform</li>
-                      <li><strong>"Content"</strong> includes all data, information, and materials on our platform</li>
-                      <li><strong>"Account"</strong> means your registered user account on our Service</li>
+                      <li><strong>&quot;Service&quot;</strong> refers to the Schoolama AI LMS platform and all related services</li>
+                      <li><strong>&quot;User&quot;</strong> means any individual or entity using our Service</li>
+                      <li><strong>&quot;Institution&quot;</strong> refers to educational organizations using our platform</li>
+                      <li><strong>&quot;Content&quot;</strong> includes all data, information, and materials on our platform</li>
+                      <li><strong>&quot;Account&quot;</strong> means your registered user account on our Service</li>
                     </ul>
                   </div>
                 </section>
@@ -384,7 +384,7 @@ export default function TermsPage() {
                       <li>Violate any applicable laws or regulations</li>
                       <li>Infringe on intellectual property rights</li>
                       <li>Transmit harmful, offensive, or inappropriate content</li>
-                      <li>Interfere with the Service's operation or security</li>
+                      <li>Interfere with the Service&apos;s operation or security</li>
                       <li>Attempt unauthorized access to other accounts or systems</li>
                       <li>Use the Service for commercial purposes without permission</li>
                     </ul>
@@ -512,7 +512,7 @@ export default function TermsPage() {
                     </p>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>Post the updated Terms on this page</li>
-                      <li>Update the "Last Updated" date</li>
+                      <li>Update the &quot;Last Updated&quot; date</li>
                       <li>Notify users of significant changes via email or platform notification</li>
                       <li>Provide reasonable time to review changes before they take effect</li>
                     </ul>
