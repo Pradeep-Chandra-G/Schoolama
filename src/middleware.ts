@@ -76,11 +76,10 @@ export default clerkMiddleware(async (auth, req) => {
 
   // 🔒 Force HTTPS
   if (proto && proto !== "https") {
-    const url = new URL(req.url);
-    url.protocol = "https:";
-    url.port = "";
-    console.log("HTTPS redirect to:", url.toString());
-    return NextResponse.redirect(url);
+    // Don't use req.url as it contains localhost - construct URL from host header
+    const redirectUrl = `https://${host}${req.nextUrl.pathname}${req.nextUrl.search}`;
+    console.log("HTTPS redirect to:", redirectUrl);
+    return NextResponse.redirect(redirectUrl);
   }
 
   // 🌐 Force non-www domain
