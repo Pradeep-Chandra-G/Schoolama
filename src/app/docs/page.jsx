@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -61,10 +62,18 @@ export default function DocsPage() {
     return () => observer.disconnect();
   }, []);
 
+  // Fixed scroll function with navbar offset
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const navbarHeight = 100; // Adjust this based on your actual navbar height
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
     setIsMobileMenuOpen(false);
   };
@@ -177,6 +186,12 @@ export default function DocsPage() {
         ::-webkit-scrollbar-thumb:hover {
           background: rgba(255, 255, 255, 0.5);
         }
+        /* Alternative CSS solution - uncomment if you prefer this approach */
+        /*
+        [data-section] {
+          scroll-margin-top: 120px;
+        }
+        */
         /* Mobile responsive improvements */
         @media (max-width: 768px) {
           .hero-title {
