@@ -1,13 +1,34 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 export default function DocsPage() {
+
+    const navbarRef = useRef(null);
+    const [navbarHeight, setNavbarHeight] = useState(100);
   const [activeSection, setActiveSection] = useState("getting-started");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateNavbarHeight = () => {
+    if (navbarRef.current) {
+      const height = navbarRef.current.offsetHeight;
+      setNavbarHeight(height);
+    }
+  };
+
+  updateNavbarHeight();
+  window.addEventListener('resize', updateNavbarHeight);
+  const timer = setTimeout(updateNavbarHeight, 100);
+
+  return () => {
+    window.removeEventListener('resize', updateNavbarHeight);
+    clearTimeout(timer);
+  };
+  },[]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,19 +85,18 @@ export default function DocsPage() {
 
   // Fixed scroll function with navbar offset
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbarHeight = 100; // Adjust this based on your actual navbar height
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - navbarHeight;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
-    setIsMobileMenuOpen(false);
-  };
+  const element = document.getElementById(sectionId);
+  if (element) {
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - navbarHeight - 20; // Added 20px buffer
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  }
+  setIsMobileMenuOpen(false);
+};
 
   const navigationItems = [
     { id: "getting-started", title: "Getting Started", icon: "🚀" },
@@ -204,7 +224,7 @@ export default function DocsPage() {
       `}</style>
 
       {/* Navigation Header */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect shadow-lg" : ""}`}>
+      <nav ref={navbarRef} className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect shadow-lg" : ""}`}>
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-3 group">
@@ -311,7 +331,7 @@ export default function DocsPage() {
 
         {/* Main Content */}
         <main className="flex-1 md:ml-80">
-          <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="max-w-4xl mx-auto sm:px-6 py-8">
             {/* Hero Section */}
             <section className="mb-16 animate-on-scroll">
               <div className="text-center mb-12">
