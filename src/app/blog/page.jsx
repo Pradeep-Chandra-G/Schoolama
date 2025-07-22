@@ -381,7 +381,6 @@ export default function BlogPage() {
                 <li><Link href="/#features" className="hover:text-white transition-colors">Features</Link></li>
                 <li><Link href="/#pricing" className="hover:text-white transition-colors">Pricing</Link></li>
                 <li><Link href="https://schoolama-ai.vercel.app" target="_blank" className="hover:text-white transition-colors">Demo</Link></li>
-                <li><Link href="/docs" className="hover:text-white transition-colors">Documentation</Link></li>
               </ul>
             </div>
             <div>

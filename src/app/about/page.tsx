@@ -590,7 +590,7 @@ export default function AboutPage() {
               Get Started Free
             </Link>
             <Link
-              href="/demo"
+              href="/contact"
               className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-all transform hover:-translate-y-1"
             >
               Request Demo
@@ -690,14 +690,6 @@ export default function AboutPage() {
                     className="hover:text-white transition-colors"
                   >
                     Help Center
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/community"
-                    className="hover:text-white transition-colors"
-                  >
-                    Community
                   </Link>
                 </li>
                 <li>

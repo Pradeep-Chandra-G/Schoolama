@@ -460,7 +460,7 @@ export default function CareersPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link
-                    href="/features#"
+                    href="/#features"
                     className="hover:text-white transition-colors"
                   >
                     Features
@@ -468,7 +468,7 @@ export default function CareersPage() {
                 </li>
                 <li>
                   <Link
-                    href="/pricing#"
+                    href="/#pricing"
                     className="hover:text-white transition-colors"
                   >
                     Pricing
