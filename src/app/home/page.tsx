@@ -1440,14 +1440,21 @@ export default function HomePage() {
                   </button>
                 </li>
                 <li>
-                  <button className="hover:text-white transition-colors">
+                  <Link
+                    href="https://schoolama-ai.vercel.app"
+                    target="_blank"
+                    className="hover:text-white transition-colors"
+                  >
                     Demo
-                  </button>
+                  </Link>
                 </li>
                 <li>
-                  <button className="hover:text-white transition-colors">
-                    API
-                  </button>
+                  <Link
+                    href="/docs"
+                    className="hover:text-white transition-colors"
+                  >
+                    Documentation
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -1455,9 +1462,12 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <button className="hover:text-white transition-colors">
+                  <Link
+                    href="/help"
+                    className="hover:text-white transition-colors"
+                  >
                     Help Center
-                  </button>
+                  </Link>
                 </li>
                 <li>
                   <Link
@@ -1468,9 +1478,12 @@ export default function HomePage() {
                   </Link>
                 </li>
                 <li>
-                  <button className="hover:text-white transition-colors">
-                    Training
-                  </button>
+                  <Link
+                    href="/terms"
+                    className="hover:text-white transition-colors"
+                  >
+                    Terms of Service
+                  </Link>
                 </li>
                 <li>
                   <button className="hover:text-white transition-colors">

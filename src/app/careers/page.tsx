@@ -514,7 +514,7 @@ export default function CareersPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <Link
-                    href="/contact"
+                    href="/help"
                     className="hover:text-white transition-colors"
                   >
                     Help Center

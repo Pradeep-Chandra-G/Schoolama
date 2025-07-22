@@ -642,6 +642,14 @@ export default function AboutPage() {
                     Demo
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/docs"
+                    className="hover:text-white transition-colors"
+                  >
+                    Documentation
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

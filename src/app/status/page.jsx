@@ -516,14 +516,14 @@ export default function StatusPage() {
               <ul className="space-y-2 text-gray-400">
                 <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
                 <li><Link href="/contact" className="hover:text-white transition-colors">Support</Link></li>
-                <li><Link href="/api-docs" className="hover:text-white transition-colors">API Status</Link></li>
+                <li><Link href="/docs" className="hover:text-white transition-colors">API Status</Link></li>
                 <li><Link href="/blog" className="hover:text-white transition-colors">Status History</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Emergency Contact</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>Email: status@schoolama.ai</li>
+                <li>Email: pradeepchandragajendra@schoolama.studio</li>
                 <li>Phone: +1 (555) 123-4567</li>
                 <li>Emergency: +1 (555) 999-0000</li>
               </ul>
