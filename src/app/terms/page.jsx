@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ChevronRight, Shield, FileText, Clock, Users, AlertTriangle, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function TermsPage() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -557,30 +558,21 @@ export default function TermsPage() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><button className="hover:text-white transition-colors">Terms of Service</button></li>
-                <li><button className="hover:text-white transition-colors">Privacy Policy</button></li>
-                <li><button className="hover:text-white transition-colors">Cookie Policy</button></li>
-                <li><button className="hover:text-white transition-colors">Data Protection</button></li>
-              </ul>
-            </div>
-            <div>
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><button className="hover:text-white transition-colors">Help Center</button></li>
-                <li><button className="hover:text-white transition-colors">Contact Support</button></li>
-                <li><button className="hover:text-white transition-colors">Documentation</button></li>
-                <li><button className="hover:text-white transition-colors">System Status</button></li>
+                <li><Link href="/help" className="hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact Support</Link></li>
+                <li><Link href="/docs" className="hover:text-white transition-colors">Documentation</Link></li>
+                <li><Link href="/status" className="hover:text-white transition-colors">System Status</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><button className="hover:text-white transition-colors">About Us</button></li>
-                <li><button className="hover:text-white transition-colors">Careers</button></li>
-                <li><button className="hover:text-white transition-colors">Blog</button></li>
-                <li><button className="hover:text-white transition-colors">Contact</button></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+                <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               </ul>
             </div>
           </div>
