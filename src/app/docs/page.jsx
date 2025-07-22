@@ -402,7 +402,7 @@ export default function DocsPage() {
                     <div className="space-y-4">
                       <h3 className="text-xl font-semibold text-white">Basic Settings</h3>
                       <div className="code-block rounded-lg p-4 font-mono text-sm text-gray-300">
-                        <div className="text-yellow-400">// config/school.js</div>
+                        <div className="text-yellow-400">config/school.js</div>
                         <div>export const schoolConfig = &#123;</div>
                         <div className="ml-4">name: &quot;Your School Name&quot;,</div>
                         <div className="ml-4">timezone: &quot;America/New_York&quot;,</div>
@@ -415,7 +415,7 @@ export default function DocsPage() {
                     <div className="space-y-4">
                       <h3 className="text-xl font-semibold text-white">AI Settings</h3>
                       <div className="code-block rounded-lg p-4 font-mono text-sm text-gray-300">
-                        <div className="text-yellow-400">// config/ai.js</div>
+                        <div className="text-yellow-400">config/ai.js</div>
                         <div>export const aiConfig = &#123;</div>
                         <div className="ml-4">analytics: true,</div>
                         <div className="ml-4">recommendations: true,</div>
