@@ -636,7 +636,7 @@ export default function AboutPage() {
                 </li>
                 <li>
                   <Link
-                    href="/demo"
+                    href="https://schoolama-ai.vercel.app"
                     className="hover:text-white transition-colors"
                   >
                     Demo
