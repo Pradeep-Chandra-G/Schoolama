@@ -203,13 +203,6 @@ export default function TermsPage() {
               </div>
               <span className="text-xl font-bold text-gradient">Schoolama AI LMS</span>
             </div>
-            <div className="hidden md:flex space-x-8">
-              <button className="text-black transition-colors nav-hover">Home</button>
-              <button className="text-black transition-colors nav-hover">Features</button>
-              <button className="text-black transition-colors nav-hover">Pricing</button>
-              <button className="text-indigo-500 font-semibold transition-colors nav-hover">Terms</button>
-              <button className="text-black transition-colors nav-hover">Contact</button>
-            </div>
             <div className="flex items-center space-x-4">
               <button className="bg-gradient-to-r from-indigo-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 hover-glow">
                 Sign In
