@@ -69,16 +69,12 @@ const matchers = Object.keys(routeAccessMap).map((route) => ({
 export default clerkMiddleware(async (auth, req) => {
   // 🔐 Step 1: Redirect HTTP → HTTPS
   const proto = req.headers.get("x-forwarded-proto");
-  const host = req.headers.get("host");
-
-  // Debug logging (remove after fixing)
-  console.log("Middleware debug:", { proto, host, url: req.url });
+  const host = req.headers.get("host");  
 
   // 🔒 Force HTTPS
   if (proto && proto !== "https") {
     // Don't use req.url as it contains localhost - construct URL from host header
     const redirectUrl = `https://${host}${req.nextUrl.pathname}${req.nextUrl.search}`;
-    console.log("HTTPS redirect to:", redirectUrl);
     return NextResponse.redirect(redirectUrl);
   }
 
@@ -86,7 +82,6 @@ export default clerkMiddleware(async (auth, req) => {
   if (host && host.startsWith("www.")) {
     // Use req.nextUrl which is already parsed and should handle this correctly
     const redirectUrl = new URL(req.nextUrl.pathname + req.nextUrl.search, `https://schoolama.studio`);
-    console.log("WWW redirect to:", redirectUrl.toString());
     return NextResponse.redirect(redirectUrl, 308);
   }
 
