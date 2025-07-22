@@ -700,7 +700,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <Link
-                    href="https://schoolama-blog-frontend-030bedd2be82.herokuapp.com/"
+                    href="/blog"
                     target="_blank"
                     className="hover:text-white transition-colors"
                   >

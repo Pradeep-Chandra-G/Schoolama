@@ -186,13 +186,6 @@ export default function BlogPage() {
               </div>
               <span className="text-xl font-bold text-gradient">Schoolama AI LMS</span>
             </div>
-            <div className="hidden md:flex space-x-8">
-              <button className="text-black transition-colors nav-hover">Home</button>
-              <button className="text-indigo-500 font-semibold transition-colors nav-hover">Blog</button>
-              <button className="text-black transition-colors nav-hover">Features</button>
-              <button className="text-black transition-colors nav-hover">Pricing</button>
-              <button className="text-black transition-colors nav-hover">Contact</button>
-            </div>
             <div className="flex items-center space-x-4">
               <button className="bg-gradient-to-r from-indigo-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 hover-glow">
                 Sign In
@@ -212,11 +205,6 @@ export default function BlogPage() {
 
         <div className="container mx-auto px-6 text-center text-white relative z-10">
           <div className="animate-slide-up">
-            <nav className="flex items-center justify-center space-x-2 text-white/80 mb-6">
-              <span>Home</span>
-              <ChevronRight size={16} />
-              <span className="text-yellow-300">Blog</span>
-            </nav>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Insights & Innovation in
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-300">
@@ -389,10 +377,10 @@ export default function BlogPage() {
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><button className="hover:text-white transition-colors">Features</button></li>
-                <li><button className="hover:text-white transition-colors">Pricing</button></li>
-                <li><button className="hover:text-white transition-colors">Demo</button></li>
-                <li><button className="hover:text-white transition-colors">API</button></li>
+                <li><Link href="/#features" className="hover:text-white transition-colors">Features</Link></li>
+                <li><Link href="/#pricing" className="hover:text-white transition-colors">Pricing</Link></li>
+                <li><Link href="https://schoolama-ai.vercel.app" target="_blank" className="hover:text-white transition-colors">Demo</Link></li>
+                <li><Link href="/docs" className="hover:text-white transition-colors">Documentation</Link></li>
               </ul>
             </div>
             <div>
@@ -408,18 +396,17 @@ export default function BlogPage() {
                     Blog <ExternalLink className="ml-1" size={12} />
                   </a>
                 </li>
-                <li><button className="hover:text-white transition-colors">Help Center</button></li>
-                <li><button className="hover:text-white transition-colors">Documentation</button></li>
-                <li><button className="hover:text-white transition-colors">Training</button></li>
+                <li><Link href="/help" className="hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link href="/docs"className="hover:text-white transition-colors">Documentation</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-gray-400">
-                <li><button className="hover:text-white transition-colors">About</button></li>
-                <li><button className="hover:text-white transition-colors">Careers</button></li>
-                <li><button className="hover:text-white transition-colors">Contact</button></li>
-                <li><button className="hover:text-white transition-colors">Privacy</button></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
+                <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                <li><Link  href="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
               </ul>
             </div>
           </div>
