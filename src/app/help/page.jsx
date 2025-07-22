@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import Link from "next/link";
 
 export default function HelpPage() {
   const [formData, setFormData] = useState({
@@ -9,11 +12,11 @@ export default function HelpPage() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState("idle");
-  const [openFAQ, setOpenFAQ] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState("idle"); // Remove TypeScript annotation
+  const [openFAQ, setOpenFAQ] = useState(null); // Remove TypeScript annotation
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target; // Proper destructuring
     setFormData(prev => ({
       ...prev,
       [name]: value,
@@ -26,18 +29,32 @@ export default function HelpPage() {
     setSubmitStatus("idle");
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setSubmitStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        category: "",
-        subject: "",
-        message: "",
+      const response = await fetch("/api/help", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
+
+      const result = await response.json(); // Get the response data
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          category: "",
+          subject: "",
+          message: "",
+        });
+        console.log("Support ticket created:", result); // Log success data
+      } else {
+        console.error("Error submitting form:", result);
+        setSubmitStatus("error");
+      }
     } catch (error) {
+      console.error("Network error:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -45,7 +62,7 @@ export default function HelpPage() {
   };
 
   const toggleFAQ = (id) => {
-    setOpenFAQ(openFAQ === id ? null : id);
+    setOpenFAQ(currentOpenFAQ => currentOpenFAQ === id ? null : id);
   };
 
   const faqCategories = [
@@ -199,22 +216,59 @@ export default function HelpPage() {
     <div className="bg-gray-50 min-h-screen">
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
         }
 
         @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
+          0%,
+          100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
         }
 
         @keyframes slide-up {
-          from { opacity: 0; transform: translateY(50px); }
-          to { opacity: 1; transform: translateY(0); }
+          from {
+            opacity: 0;
+            transform: translateY(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slide-down {
+          from {
+            opacity: 0;
+            max-height: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            max-height: 200px;
+            transform: translateY(0);
+          }
         }
 
         .gradient-bg {
-          background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+          background: linear-gradient(
+            -45deg,
+            #667eea,
+            #764ba2,
+            #f093fb,
+            #f5576c,
+            #4facfe,
+            #00f2fe
+          );
           background-size: 400% 400%;
           animation: gradient 6s ease infinite;
         }
@@ -231,6 +285,10 @@ export default function HelpPage() {
 
         .animate-slide-up {
           animation: slide-up 0.6s ease-out forwards;
+        }
+
+        .animate-slide-down {
+          animation: slide-down 0.3s ease-out forwards;
         }
 
         .card-hover {
@@ -265,30 +323,50 @@ export default function HelpPage() {
         .hover-glow:hover {
           box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
         }
+
+        .faq-answer {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease-in-out;
+        }
+
+        .faq-answer.open {
+          max-height: 200px;
+          animation: slide-down 0.3s ease-out forwards;
+        }
       `}</style>
 
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass-effect">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 cursor-pointer">
+            <Link href="/" className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">S</span>
               </div>
               <span className="text-xl font-bold text-gradient">
                 Schoolama AI LMS
               </span>
-            </div>
+            </Link>
             <div className="flex items-center space-x-4">
-              <button className="text-gray-600 hover:text-gray-900 transition-colors">
+              <Link
+                href="/"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
                 Home
-              </button>
-              <button className="text-gray-600 hover:text-gray-900 transition-colors">
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
                 Contact
-              </button>
-              <button className="bg-gradient-to-r from-indigo-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300">
+              </Link>
+              <Link
+                href="/sign-in"
+                className="bg-gradient-to-r from-indigo-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300"
+              >
                 Sign In
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -299,7 +377,7 @@ export default function HelpPage() {
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-white bg-opacity-10 rounded-full animate-float"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-white bg-opacity-5 rounded-full animate-float" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-white bg-opacity-5 rounded-full animate-float"></div>
         </div>
 
         <div className="container mx-auto px-6 text-center text-white relative z-10">
@@ -388,18 +466,22 @@ export default function HelpPage() {
                           {faq.question}
                         </span>
                         <span
-                          className={`text-indigo-500 transform transition-transform duration-300 ${
+                          className={`text-indigo-500 transform transition-transform ${
                             openFAQ === faq.id ? "rotate-180" : ""
                           }`}
                         >
                           ⌄
                         </span>
                       </button>
-                      {openFAQ === faq.id && (
-                        <div className="px-6 pb-4 text-gray-600 leading-relaxed border-t border-gray-100 pt-4 animate-slide-up">
+                      <div
+                        className={`faq-answer ${
+                          openFAQ === faq.id ? "open" : ""
+                        }`}
+                      >
+                        <div className="px-6 pb-4 text-gray-600 leading-relaxed">
                           {faq.answer}
                         </div>
-                      )}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -418,7 +500,7 @@ export default function HelpPage() {
                 Still Need Help?
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Can't find what you're looking for? Our support team is here to help you with any questions or issues.
+                Can&apos;t find what you&apos;re looking for? Our support team is here to help you with any questions or issues.
               </p>
             </div>
 
@@ -538,7 +620,7 @@ export default function HelpPage() {
                   </div>
                 )}
 
-                <div className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -656,7 +738,7 @@ export default function HelpPage() {
                       "Submit Support Request"
                     )}
                   </button>
-                </div>
+                </form>
               </div>
             </div>
           </div>
@@ -673,15 +755,19 @@ export default function HelpPage() {
             Try Schoolama AI LMS today and see how it can transform your educational institution.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => window.open('https://schoolama-ai.vercel.app', '_blank')}
-              className="bg-white text-indigo-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg"
+            <Link
+              href="https://schoolama-ai.vercel.app"
+              target="_blank"
+              className="bg-white text-indigo-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg inline-block"
             >
               🚀 Start Free Trial
-            </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-500 transition-all duration-300 hover:scale-105">
+            </Link>
+            <Link
+              href="/contact"
+              className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-indigo-500 transition-all duration-300 hover:scale-105 inline-block"
+            >
               💬 Contact Sales
-            </button>
+            </Link>
           </div>
         </div>
       </section>
