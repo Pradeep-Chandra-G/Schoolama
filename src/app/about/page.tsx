@@ -666,7 +666,6 @@ export default function AboutPage() {
                 <li>
                   <Link
                     href="/blog"
-                    target="_blank"
                     className="hover:text-white transition-colors"
                   >
                     Blog

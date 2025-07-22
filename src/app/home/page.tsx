@@ -218,14 +218,14 @@ export default function HomePage() {
             <div className="flex items-center space-x-4">
               <Link
                 href="/sign-in"
-                className="bg-gradient-to-r from-indigo-500 to-pink-500 md:text-sm text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 hover-glow"
+                className="bg-gradient-to-r from-indigo-500 to-pink-500 sm:text-sm text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 hover-glow"
               >
                 Sign In
               </Link>
               <Link
                 href="https://schoolama-ai.vercel.app"
                 target="_blank"
-                className="bg-gradient-to-r from-indigo-500 to-pink-500 md:text-sm text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 hover-glow"
+                className="bg-gradient-to-r from-indigo-500 to-pink-500 sm:text-sm text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300 hover-glow"
               >
                 Try Free
               </Link>
