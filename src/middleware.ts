@@ -71,19 +71,23 @@ export default clerkMiddleware(async (auth, req) => {
   const proto = req.headers.get("x-forwarded-proto");
   const host = req.headers.get("host");
 
+  // Debug logging (remove after fixing)
+  console.log("Middleware debug:", { proto, host, url: req.url });
+
   // 🔒 Force HTTPS
   if (proto && proto !== "https") {
     const url = new URL(req.url);
     url.protocol = "https:";
-    // Remove any port from the URL for external redirects
     url.port = "";
+    console.log("HTTPS redirect to:", url.toString());
     return NextResponse.redirect(url);
   }
 
   // 🌐 Force non-www domain
   if (host && host.startsWith("www.")) {
-    const newHost = host.replace(/^www\./, "");
-    const redirectUrl = `https://${newHost}${req.nextUrl.pathname}${req.nextUrl.search}`;
+    // Use req.nextUrl which is already parsed and should handle this correctly
+    const redirectUrl = new URL(req.nextUrl.pathname + req.nextUrl.search, `https://schoolama.studio`);
+    console.log("WWW redirect to:", redirectUrl.toString());
     return NextResponse.redirect(redirectUrl, 308);
   }
 
