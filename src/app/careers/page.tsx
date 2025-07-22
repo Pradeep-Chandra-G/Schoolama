@@ -459,18 +459,25 @@ export default function CareersPage() {
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
+                  <Link
+                    href="/features#"
+                    className="hover:text-white transition-colors"
+                  >
                     Features
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
+                  <Link
+                    href="/pricing#"
+                    className="hover:text-white transition-colors"
+                  >
                     Pricing
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="https://schoolama-ai.vercel.app"
+                    target="_blank"
                     className="hover:text-white transition-colors"
                   >
                     Demo
@@ -533,7 +540,7 @@ export default function CareersPage() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Schoolama AI LMS. All rights reserved.</p>
+            <p>&copy; 2025 Schoolama AI LMS. All rights reserved.</p>
           </div>
         </div>
       </footer>

@@ -533,10 +533,6 @@ export default function HomePage() {
                     <span className="text-yellow-300 mr-2">✓</span> Priority
                     support
                   </li>
-                  <li className="flex items-center">
-                    <span className="text-yellow-300 mr-2">✓</span> Custom
-                    integrations
-                  </li>
                 </ul>
                 <button className="w-full bg-white text-indigo-500 py-3 px-6 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300">
                   Start Free Trial
@@ -731,7 +727,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Schoolama AI LMS. All rights reserved.</p>
+            <p>&copy; 2025 Schoolama AI LMS. All rights reserved.</p>
           </div>
         </div>
       </footer>

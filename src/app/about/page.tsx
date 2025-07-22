@@ -642,14 +642,6 @@ export default function AboutPage() {
                     Demo
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/integrations"
-                    className="hover:text-white transition-colors"
-                  >
-                    Integrations
-                  </Link>
-                </li>
               </ul>
             </div>
             <div>
