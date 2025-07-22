@@ -686,17 +686,8 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Section observer for navbar color changes
+  // Simplified section observer for navbar color changes
   useEffect(() => {
-    const sections = ["hero", "features", "benefits", "pricing", "contact"];
-    const sectionElements = sections.map(
-      (id) =>
-        document.getElementById(id) ||
-        document.querySelector(
-          `section:nth-of-type(${sections.indexOf(id) + 1})`
-        )
-    );
-
     const observerOptions = {
       threshold: 0.3,
       rootMargin: "-100px 0px -50% 0px",
@@ -705,39 +696,76 @@ export default function HomePage() {
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const sectionId =
-            entry.target.id ||
-            (entry.target.classList.contains("gradient-bg")
-              ? "hero"
-              : entry.target.querySelector("#features")
-              ? "features"
-              : entry.target.querySelector("#benefits")
-              ? "benefits"
-              : entry.target.querySelector("#pricing")
-              ? "pricing"
-              : entry.target.querySelector("#contact")
-              ? "contact"
-              : "hero");
-          setCurrentSection(sectionId);
+          const element = entry.target;
+
+          // Check for hero section (gradient background)
+          if (
+            element.classList.contains("gradient-bg") ||
+            element.classList.contains("hero-section")
+          ) {
+            setCurrentSection("hero");
+          }
+          // Check for footer section
+          else if (
+            element.tagName === "FOOTER" ||
+            element.id === "footer" ||
+            element.classList.contains("footer-section")
+          ) {
+            setCurrentSection("footer");
+          }
+          // Check for contact section (gradient background)
+          else if (
+            element.id === "contact" ||
+            element.classList.contains("contact-section")
+          ) {
+            setCurrentSection("contact");
+          }
+          // All other sections (features, benefits, pricing)
+          else {
+            const sectionId = element.id || "other";
+            setCurrentSection(sectionId);
+          }
         }
       });
     }, observerOptions);
 
-    // Observe the hero section (gradient background)
-    const heroSection = document.querySelector(".gradient-bg");
-    if (heroSection) {
-      heroSection.id = "hero";
-      sectionObserver.observe(heroSection);
-    }
-
-    // Observe other sections
-    sectionElements.forEach((element) => {
-      if (element) {
-        sectionObserver.observe(element);
+    // Wait for DOM to be ready
+    const observeSections = () => {
+      // Observe hero section
+      const heroSection = document.querySelector(".gradient-bg, .hero-section");
+      if (heroSection) {
+        heroSection.classList.add("hero-section");
+        sectionObserver.observe(heroSection);
       }
-    });
 
-    return () => sectionObserver.disconnect();
+      // Observe other sections
+      const sections = ["features", "benefits", "pricing", "contact"];
+      sections.forEach((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          if (sectionId === "contact") {
+            element.classList.add("contact-section");
+          }
+          sectionObserver.observe(element);
+        }
+      });
+
+      // Observe footer
+      const footer = document.querySelector("footer");
+      if (footer) {
+        footer.classList.add("footer-section");
+        sectionObserver.observe(footer);
+      }
+    };
+
+    // Run immediately and also after a short delay to ensure DOM is ready
+    observeSections();
+    const timeout = setTimeout(observeSections, 100);
+
+    return () => {
+      sectionObserver.disconnect();
+      clearTimeout(timeout);
+    };
   }, []);
 
   useEffect(() => {
@@ -781,12 +809,30 @@ export default function HomePage() {
     }
   };
 
-  // Determine navbar text color based on current section
+  // Simplified navbar text color logic
   const getNavTextColor = () => {
-    if (currentSection === "hero" || currentSection === "contact") {
-      return "text-white"; // White text on dark/gradient backgrounds
+    // White text for hero, contact, and footer sections (gradient/dark backgrounds)
+    if (
+      currentSection === "hero" ||
+      currentSection === "contact" ||
+      currentSection === "footer"
+    ) {
+      return "text-white";
     }
-    return "text-black"; // Black text on light backgrounds
+    // Black text for all other sections (light backgrounds)
+    return "text-black";
+  };
+
+  const getLogoTextColor = () => {
+    // Use gradient text only on light backgrounds, white text on dark backgrounds
+    if (
+      currentSection === "hero" ||
+      currentSection === "contact" ||
+      currentSection === "footer"
+    ) {
+      return "text-white";
+    }
+    return "text-gradient";
   };
 
   return (
@@ -908,6 +954,13 @@ export default function HomePage() {
         .nav-text-transition {
           transition: color 0.3s ease-in-out;
         }
+
+        /* Ensure mobile compatibility */
+        @media (max-width: 768px) {
+          .nav-text-transition {
+            transition: color 0.2s ease-in-out;
+          }
+        }
       `}</style>
 
       {/* Navigation */}
@@ -923,11 +976,7 @@ export default function HomePage() {
                 <span className="text-white font-bold text-xl">S</span>
               </div>
               <span
-                className={`text-xl font-bold nav-text-transition ${
-                  currentSection === "hero" || currentSection === "contact"
-                    ? "text-white"
-                    : "text-gradient"
-                }`}
+                className={`text-xl font-bold nav-text-transition ${getLogoTextColor()}`}
               >
                 Schoolama AI LMS
               </span>
@@ -978,7 +1027,7 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="gradient-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section className="gradient-bg hero-section min-h-screen flex items-center justify-center relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white bg-opacity-10 rounded-full animate-float"></div>
@@ -1312,7 +1361,7 @@ export default function HomePage() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="w-full border-2 border-indigo-500 text-indigo-500 py-3 px-6 rounded-full font-semibold hover:bg-indigo-500 hover:text-white transition-all duration-300"
+                  className="w-full border-2 border-indigo-500 text-indigo-500 py-3 px-6 rounded-full font-semibold hover:bg-indigo-500 hover:text-white transition-all duration-300 text-center block"
                 >
                   Contact Sales
                 </Link>
@@ -1325,7 +1374,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section
         id="contact"
-        className="py-20 bg-gradient-to-r from-indigo-500 to-pink-500"
+        className="contact-section py-20 bg-gradient-to-r from-indigo-500 to-pink-500"
       >
         <div className="container mx-auto px-6 text-center text-white">
           <div className="animate-on-scroll">
@@ -1356,7 +1405,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12">
+      <footer id="footer" className="footer-section bg-black text-white py-12">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
