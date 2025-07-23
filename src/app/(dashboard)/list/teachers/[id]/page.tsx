@@ -78,7 +78,7 @@ const SingleTeacherPage = async ({
                     {new Intl.DateTimeFormat("en-GB").format(teacher.birthday)}
                   </span>
                 </div>
-                <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-start gap-2 break-words">
+                <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2 break-words">
                   <Image
                     src="/mail.png"
                     alt=""
