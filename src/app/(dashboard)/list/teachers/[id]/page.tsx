@@ -80,7 +80,9 @@ const SingleTeacherPage = async ({
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-start gap-2 break-words">
                   <Image src="/mail.png" alt="" width={14} height={14} />
-                  <span className="break-all">{teacher.email || "-"}</span>
+                  <span className="break-all whitespace-pre-line">
+                    {teacher.email || "-"}
+                  </span>
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/phone.png" alt="" width={14} height={14} />
