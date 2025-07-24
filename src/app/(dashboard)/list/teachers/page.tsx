@@ -9,7 +9,9 @@ import Link from "next/link";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { auth } from "@clerk/nextjs/server";
 
-type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
+type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] } & {
+  email: string;
+} & { phone: string } & { username: string };
 
 const TeacherListPage = async ({
   searchParams,
