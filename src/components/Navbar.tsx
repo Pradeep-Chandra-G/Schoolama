@@ -58,12 +58,12 @@
 //       <div className="hidden md:flex items-center gap-2 text-xs rounded-full ring-[1.5px] ring-gray-300 px-2">
 //         <GlobalSearch />
 //       </div>
-      
+
 //       {/* ICONS AND USER */}
 //       <div className="flex items-center gap-6 justify-end w-full">
 //         {/* Mobile Search */}
 //         <MobileSearch />
-        
+
 //         <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer">
 //           <svg
 //             width="20"
@@ -128,43 +128,11 @@ const Navbar = async () => {
       <div className="hidden md:flex items-center gap-2 text-xs rounded-full ring-[1.5px] ring-gray-300 px-2 py-1 bg-white max-w-md">
         <GlobalSearch />
       </div>
-      
+
       {/* ICONS AND USER */}
-      <div className="flex items-center gap-6 justify-end w-full">
+      <div className="flex items-start gap-6 justify-end w-full">
         {/* Mobile Search */}
         <MobileSearch />
-        
-        <div className="bg-white rounded-full w-7 h-7 flex items-center justify-center cursor-pointer">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M16 8L8 16"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M8 8L16 16"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
         <div className="flex flex-col">
           <span className="text-xs leading-3 font-medium">
             {user?.firstName && user?.lastName
