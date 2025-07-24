@@ -124,15 +124,21 @@ const Navbar = async () => {
 
   return (
     <div className="flex items-center justify-between p-4">
-      {/* SEARCH BAR - Desktop Only */}
-      <div className="hidden md:flex items-center gap-2 text-xs rounded-full ring-[1.5px] ring-gray-300 px-2 py-1 bg-white max-w-md">
-        <GlobalSearch />
+      {/* LEFT SIDE - Search bars */}
+      <div className="flex items-center">
+        {/* Desktop Search */}
+        <div className="hidden md:flex items-center gap-2 text-xs rounded-full ring-[1.5px] ring-gray-300 px-2 py-1 bg-white max-w-md">
+          <GlobalSearch />
+        </div>
+
+        {/* Mobile Search - shows on left on mobile */}
+        <div className="md:hidden">
+          <MobileSearch />
+        </div>
       </div>
 
-      {/* ICONS AND USER */}
-      <div className="flex items-start gap-6 justify-end w-full">
-        {/* Mobile Search */}
-        <MobileSearch />
+      {/* RIGHT SIDE - User info */}
+      <div className="flex items-center gap-6">
         <div className="flex flex-col">
           <span className="text-xs leading-3 font-medium">
             {user?.firstName && user?.lastName
