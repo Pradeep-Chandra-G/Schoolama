@@ -485,7 +485,7 @@ export default function GlobalSearch() {
         <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
           {results.length === 0 && !isLoading && query.trim().length >= 2 && (
             <div className="p-4 text-center text-gray-500">
-              No results found for "{query}"
+              No results found for &quot;{query}&quot;
             </div>
           )}
 
