@@ -2,9 +2,9 @@
   "name": "pradeep-next-dashboard",
   "version": "0.1.0",
   "private": true,
-  "description": "First, run the development server:",
+  "description": "SchooLama is a comprehensive school management system designed to streamline administrative tasks, enhance communication, and improve the overall educational experience for students, teachers, and parents. It offers features such as attendance tracking, grade management, timetable scheduling, and more, all within a user-friendly interface.",
   "license": "ISC",
-  "author": "",
+  "author": "Pradeep Chandra",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
