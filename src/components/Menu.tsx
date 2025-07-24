@@ -2,11 +2,6 @@ import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 
-const user = await currentUser();
-const role = (user?.publicMetadata as any)?.role ??
-    (user?.unsafeMetadata as any)?.role ??
-    (user?.privateMetadata as any)?.role ;
-
 const menuItems = [
   {
     title: "MENU",
@@ -14,14 +9,14 @@ const menuItems = [
       {
         icon: "/home.png",
         label: "Home",
-        href: `/${role}`,
+        href: "/dashboard",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
         icon: "/AI.png",
         label: "AI-LMS",
         href: "https://schoolama-ai.vercel.app/",
-        visible: ["admin", "student"]
+        visible: ["admin", "student"],
       },
       {
         icon: "/teacher.png",
