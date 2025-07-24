@@ -23,11 +23,11 @@ const LessonListPage = async ({
   const columns = [
     {
       header: "Lesson Name",
-      accessor: "lesson",
+      accessor: "name",
     },
     {
       header: "Subject Name",
-      accessor: "name",
+      accessor: "subject",
     },
     {
       header: "Class",
