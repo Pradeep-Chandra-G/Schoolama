@@ -149,3 +149,22 @@ export const assignmentSchema = z.object({
 });
 
 export type AssignmentSchema = z.infer<typeof assignmentSchema>;
+
+export const resultSchema = z.object({
+  id: z.coerce.number().optional(),
+  score: z.coerce.number().min(0, { message: "Score must be at least 0" }).max(100, { message: "Score must be at most 100" }),
+  studentId: z.string().min(1, { message: "Student is required!" }),
+  examId: z.coerce.number().optional().nullable(),
+  assignmentId: z.coerce.number().optional().nullable(),
+}).refine((data) => {
+  // Either examId or assignmentId must be provided, but not both
+  const hasExam = data.examId && data.examId > 0;
+  const hasAssignment = data.assignmentId && data.assignmentId > 0;
+  
+  return (hasExam && !hasAssignment) || (!hasExam && hasAssignment);
+}, {
+  message: "Either an exam or assignment must be selected, but not both",
+  path: ["examId"], // This will show the error on the examId field
+});
+
+export type ResultSchema = z.infer<typeof resultSchema>;

@@ -10,12 +10,19 @@ import {
   TeacherSchema,
   EventSchema,
   LessonSchema,
-  AssignmentSchema
+  AssignmentSchema,
+  ResultSchema
 } from "./formValidationSchemas";
 import prisma from "./prisma";
 import { clerkClient } from "@clerk/nextjs/server";
 
 type CurrentState = { success: boolean; error: boolean };
+
+type ActionState = {
+  success: boolean;
+  error: string | null;
+  message?: string;
+};
 
 export const createSubject = async (
   currentState: CurrentState,
@@ -883,5 +890,94 @@ export const deleteAssignment = async (
   } catch (err) {
     console.log(err);
     return { success: false, error: true };
+  }
+};
+
+export const createResult = async (
+  currentState: CurrentState,
+  data: ResultSchema
+) => {
+  try {
+    // Validate that either examId or assignmentId is provided
+    if (!data.examId && !data.assignmentId) {
+      return { success: false, error: true };
+    }
+
+    if (data.examId && data.assignmentId) {
+      return { success: false, error: true };
+    }
+
+    await prisma.result.create({
+      data: {
+        score: data.score,
+        studentId: data.studentId,
+        examId: data.examId || null,
+        assignmentId: data.assignmentId || null,
+      },
+    });
+
+    // revalidatePath("/list/results");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const updateResult = async (
+  currentState: CurrentState,
+  data: ResultSchema
+) => {
+  if (!data.id) {
+    return { success: false, error: true };
+  }
+
+  try {
+    // Validate that either examId or assignmentId is provided
+    if (!data.examId && !data.assignmentId) {
+      return { success: false, error: true };
+    }
+
+    if (data.examId && data.assignmentId) {
+      return { success: false, error: true };
+    }
+
+    await prisma.result.update({
+      where: {
+        id: data.id,
+      },
+      data: {
+        score: data.score,
+        studentId: data.studentId,
+        examId: data.examId || null,
+        assignmentId: data.assignmentId || null,
+      },
+    });
+
+    // revalidatePath("/list/results");
+    return { success: true, error: false };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: true };
+  }
+};
+
+export const deleteResult = async (
+  currentState: CurrentState,
+  data: FormData
+): Promise<ActionState> => {
+  const id = data.get("id") as string;
+  try {
+    await prisma.result.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    // revalidatePath("/list/results");
+    return { success: true, error: null, message: "Result deleted successfully" };
+  } catch (err) {
+    console.log(err);
+    return { success: false, error: "Failed to delete result" };
   }
 };

@@ -9,7 +9,8 @@ import {
   deleteParent,
   deleteEvent,
   deleteLesson,
-  deleteAssignment, // Add this import
+  deleteAssignment,
+  deleteResult, // Add this import
 } from "@/lib/actions";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -28,10 +29,10 @@ const deleteActionMap = {
   parent: deleteParent,
   lesson: deleteLesson,
   assignment: deleteAssignment,
-  result: deleteSubject,
-  attendance: deleteSubject,
+  result: deleteResult,
+  attendance: deleteSubject, //TODO: Implement deleteAttendance action
   event: deleteEvent, // Add this line
-  announcement: deleteSubject,
+  announcement: deleteSubject, //TODO: Implement deleteAnnouncement action
 };
 
 // USE LAZY LOADING
@@ -61,6 +62,9 @@ const LessonForm = dynamic(() => import("./forms/LessonForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 const AssignmentForm = dynamic(() => import("./forms/AssignmentForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const ResultForm = dynamic(() => import("./forms/ResultForm"), {
   loading: () => <h1>Loading...</h1>,
 });
 
@@ -138,6 +142,14 @@ const forms: {
   ),
   assignment: (setOpen, type, data, relatedData) => (
     <AssignmentForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  result: (setOpen, type, data, relatedData) => (
+    <ResultForm
       type={type}
       data={data}
       setOpen={setOpen}
