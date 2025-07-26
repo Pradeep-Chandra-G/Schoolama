@@ -19,7 +19,7 @@ const Navbar = async () => {
 
         {/* Mobile Search - shows on left on mobile */}
         <div className="md:hidden">
-          <MobileSearch />
+          <MobileSearch  role={role} userId={userId}/>
         </div>
       </div>
 
