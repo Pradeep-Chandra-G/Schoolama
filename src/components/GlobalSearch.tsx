@@ -63,7 +63,12 @@ const typeColors = {
   event: "text-yellow-600",
 };
 
-export default function GlobalSearch({ role, userId }: { role: string; userId: string }) {
+type GlobalSearchProps = {
+  role: string;
+  userId: string;
+};
+
+export default function GlobalSearch({ role, userId }: GlobalSearchProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
