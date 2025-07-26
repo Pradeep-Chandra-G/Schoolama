@@ -74,6 +74,7 @@ export default function GlobalSearch() {
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const resultRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Search functionality
   useEffect(() => {
@@ -108,6 +109,13 @@ export default function GlobalSearch() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
+
+      if (selectedIndex >= 0 && resultRefs.current[selectedIndex]) {
+        resultRefs.current[selectedIndex]?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
 
       switch (e.key) {
         case "ArrowDown":
@@ -254,6 +262,9 @@ export default function GlobalSearch() {
             return (
               <div
                 key={`${result.type}-${result.id}`}
+                ref={(el) => {
+                  resultRefs.current[index] = el;
+                }}
                 onClick={() => handleResultClick(result)}
                 className={`p-3 md:p-4 cursor-pointer border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors ${
                   index === selectedIndex ? "bg-blue-50" : ""
