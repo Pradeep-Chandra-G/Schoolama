@@ -63,7 +63,7 @@ const typeColors = {
   event: "text-yellow-600",
 };
 
-export default function GlobalSearch() {
+export default function GlobalSearch({ role, userId }: { role: string; userId: string }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +87,7 @@ export default function GlobalSearch() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `/api/search?q=${encodeURIComponent(debouncedQuery)}`
+          `/api/search?q=${encodeURIComponent(debouncedQuery)}&role=${encodeURIComponent(role)}&userId=${encodeURIComponent(userId)}`
         );
         const data = await response.json();
         setResults(data.results || []);
@@ -102,7 +102,7 @@ export default function GlobalSearch() {
     };
 
     performSearch();
-  }, [debouncedQuery]);
+  }, [debouncedQuery, role, userId]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -174,7 +174,7 @@ export default function GlobalSearch() {
     if (!query.trim()) return text;
 
     const regex = new RegExp(
-      `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+      `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\  const handleResultClick = (result: SearchResult")})`,
       "gi"
     );
     const parts = text.split(regex);
