@@ -5,8 +5,7 @@ import MobileSearch from "./MobileSearch";
 
 const Navbar = async () => {
   const user = await currentUser();
-  const role = ((user?.publicMetadata as any)?.role as string) || "admin";
-  const userId = ((user?.publicMetadata as any)?.userId as string) || "";
+  const role = (user?.publicMetadata as any)?.role || "admin";
 
   return (
     <div className="flex items-center justify-between p-4">
@@ -14,12 +13,12 @@ const Navbar = async () => {
       <div className="flex items-center">
         {/* Desktop Search */}
         <div className="hidden md:flex items-center gap-2 text-xs rounded-full ring-[1.5px] ring-gray-300 px-2 py-1 bg-white max-w-md">
-          <GlobalSearch role={role} userId={userId} />
+          <GlobalSearch />
         </div>
 
         {/* Mobile Search - shows on left on mobile */}
         <div className="md:hidden">
-          <MobileSearch  role={role} userId={userId}/>
+          <MobileSearch />
         </div>
       </div>
 

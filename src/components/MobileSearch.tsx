@@ -5,12 +5,7 @@ import { useState } from "react";
 import { Search, X } from "lucide-react";
 import GlobalSearch from "./GlobalSearch";
 
-type MobileSearchProps = {
-  role: string;
-  userId: string;
-};
-
-export default function MobileSearch({ role, userId }: MobileSearchProps) {
+export default function MobileSearch() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -36,7 +31,7 @@ export default function MobileSearch({ role, userId }: MobileSearchProps) {
             </button>
           </div>
           <div className="p-4">
-            <GlobalSearch userId={userId} role={role} />
+            <GlobalSearch />
           </div>
         </div>
       )}
