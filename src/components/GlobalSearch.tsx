@@ -73,6 +73,7 @@ export default function GlobalSearch() {
 
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const resultsContainerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const resultRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -105,17 +106,34 @@ export default function GlobalSearch() {
     performSearch();
   }, [debouncedQuery]);
 
+  // Scroll selected item into view
+  useEffect(() => {
+    if (selectedIndex >= 0 && resultRefs.current[selectedIndex] && resultsContainerRef.current) {
+      const selectedElement = resultRefs.current[selectedIndex];
+      const container = resultsContainerRef.current;
+      
+      if (selectedElement) {
+        const elementTop = selectedElement.offsetTop;
+        const elementBottom = elementTop + selectedElement.offsetHeight;
+        const containerTop = container.scrollTop;
+        const containerBottom = containerTop + container.clientHeight;
+
+        // If element is above the visible area
+        if (elementTop < containerTop) {
+          container.scrollTop = elementTop;
+        }
+        // If element is below the visible area
+        else if (elementBottom > containerBottom) {
+          container.scrollTop = elementBottom - container.clientHeight;
+        }
+      }
+    }
+  }, [selectedIndex]);
+
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isOpen) return;
-
-      if (selectedIndex >= 0 && resultRefs.current[selectedIndex]) {
-        resultRefs.current[selectedIndex]?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }
+      if (!isOpen || results.length === 0) return;
 
       switch (e.key) {
         case "ArrowDown":
@@ -245,7 +263,10 @@ export default function GlobalSearch() {
 
       {/* Search Results Dropdown - Larger for md+ devices */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 md:max-h-[32rem] overflow-y-auto z-50 md:min-w-[400px] lg:min-w-[500px]">
+        <div 
+          ref={resultsContainerRef}
+          className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 md:max-h-[32rem] overflow-y-auto z-50 md:min-w-[400px] lg:min-w-[500px]"
+        >
           {results.length === 0 && !isLoading && query.trim().length >= 2 && (
             <div className="p-4 text-center text-gray-500">
               No results found for &quot;{query}&quot;
