@@ -1,0 +1,47 @@
+// app/globals.scss
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;0,9..40,1000;1,9..40,100;1,9..40,1000&display=swap');
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "DM Sans", sans-serif;
+}
+
+body {
+  background-color: #0c0c1d;
+  color: lightgray;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+section {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: center;
+  overflow: hidden;
+}
+
+@mixin mobile {
+  @media (max-width: 738px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (max-width: 1366px) {
+    @content;
+  }
+}
