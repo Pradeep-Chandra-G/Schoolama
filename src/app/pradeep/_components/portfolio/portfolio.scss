@@ -3,7 +3,7 @@
 .portfolio {
   position: relative;
 
-  .progress {
+  .customProgress {
     position: sticky;
     top: 0;
     left: 0;
@@ -17,7 +17,7 @@
       font-size: 24px;
     }
 
-    .progressBar {
+    .customProgressBar {
       height: 10px;
       background-color: white;
     }
