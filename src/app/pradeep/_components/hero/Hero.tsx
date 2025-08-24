@@ -1,6 +1,7 @@
 // app/portfolio/components/hero/Hero.tsx
 import "./hero.scss";
 import { motion } from "framer-motion";
+import { dmSans } from "@/lib/fonts";
 
 const textVariants = {
   initial: {
@@ -40,7 +41,7 @@ const sliderVariants = {
 
 const Hero = () => {
   return (
-    <div className="hero">
+    <div className={`hero ${dmSans.className}`}>
       <div className="wrapper">
         <motion.div
           className="textContainer"

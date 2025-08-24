@@ -1,5 +1,6 @@
 // app/portfolio/components/sidebar/links/Links.tsx
 import { motion } from "framer-motion";
+import { dmSans } from "@/lib/fonts";
 
 const variants = {
   open: {
@@ -29,7 +30,7 @@ const Links = () => {
   const items = ["Homepage", "Services", "Portfolio", "Contact", "About"];
 
   return (
-    <motion.div className="links" variants={variants}>
+    <motion.div className={`links ${dmSans.className}`} variants={variants}>
       {items.map((item) => (
         <motion.a
           href={`#${item}`}

@@ -2,10 +2,11 @@
 import Sidebar from "../sidebar/Sidebar";
 import "./navbar.scss";
 import { motion } from "framer-motion";
+import { dmSans } from "@/lib/fonts";
 
 const Navbar = () => {
   return (
-    <div className="navbar">
+    <div className={`navbar ${dmSans.className}`}>
       {/* Sidebar */}
       <Sidebar/>
       <div className="wrapper">

@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import "./portfolio.scss";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { dmSans } from "@/lib/fonts";
 
 const items = [
   {
@@ -47,7 +48,7 @@ const Single = ({ item }: { item: PortfolioItem }) => {
 
   return (
     <section>
-      <div className="container">
+      <div className={`container ${dmSans.className}`}>
         <div className="wrapper">
           <div className="imageContainer" ref={ref}>
             <img src={item.img} alt="" />

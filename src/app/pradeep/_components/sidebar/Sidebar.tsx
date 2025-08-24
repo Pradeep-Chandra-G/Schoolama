@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Links from "./links/Links";
 import "./sidebar.scss";
 import ToggleButton from "./toggleButton/ToggleButton";
+import { dmSans } from "@/lib/fonts";
 
 const variants = {
   open: {
@@ -27,7 +28,7 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <motion.div className="sidebar" animate={open ? "open" : "closed"}>
+    <motion.div className={`sidebar ${dmSans.className}`} animate={open ? "open" : "closed"}>
       <motion.div className="bg" variants={variants}>
         <Links />
       </motion.div>

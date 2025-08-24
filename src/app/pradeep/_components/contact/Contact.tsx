@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./contact.scss";
 import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import { dmSans } from "@/lib/fonts";
 
 const variants = {
   initial: {
@@ -54,7 +55,7 @@ const Contact = () => {
   return (
     <motion.div
       ref={ref}
-      className="contact"
+      className={`contact ${dmSans.className}`}
       variants={variants}
       initial="initial"
       whileInView="animate"

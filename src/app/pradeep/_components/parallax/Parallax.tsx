@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import "./parallax.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { dmSans } from "@/lib/fonts";
 
 interface ParallaxProps {
   type: string;
@@ -19,7 +20,7 @@ const Parallax = ({ type }: ParallaxProps) => {
 
   return (
     <div
-      className="parallax"
+      className={`parallax ${dmSans.className}`}
       ref={ref}
       style={{
         background:

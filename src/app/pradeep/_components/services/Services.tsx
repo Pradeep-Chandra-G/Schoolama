@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import "./services.scss";
 import { motion, useInView } from "framer-motion";
+import { dmSans } from "@/lib/fonts";
 
 const variants = {
   initial: {
@@ -26,7 +27,7 @@ const Services = () => {
 
   return (
     <motion.div
-      className="services"
+      className={`services ${dmSans.className}`}
       variants={variants}
       initial="initial"
       // animate="animate"
