@@ -521,7 +521,7 @@ const Contact = () => {
     >
       <motion.div className="flex-1 flex flex-col gap-10 md:gap-5 md:text-center md:items-center md:mt-16" variants={variants}>
         <motion.h1 variants={variants} className="text-8xl md:text-4xl leading-[88px]">
-          Let's work together
+          Let&apos;s work together
         </motion.h1>
         <motion.div className="flex flex-col" variants={variants}>
           <h2 className="text-xl">Mail</h2>
