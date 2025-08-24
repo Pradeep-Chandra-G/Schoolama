@@ -29,6 +29,8 @@
     "prisma": "^5.19.1",
     "react": "^18",
     "react-big-calendar": "^1.13.2",
+    "@emailjs/browser": "^4.4.1",
+    "framer-motion": "^11.11.17",
     "react-calendar": "^5.0.0",
     "react-dom": "^18",
     "react-hook-form": "^7.52.2",
