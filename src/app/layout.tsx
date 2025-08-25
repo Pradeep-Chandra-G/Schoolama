@@ -4,7 +4,12 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { inter } from "./../lib/fonts";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "SchooLama - AI-powered LMS for Modern Education",
