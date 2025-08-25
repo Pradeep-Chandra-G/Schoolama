@@ -1,7 +1,7 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import "./globals.scss";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "SchooLama",
     images: [
       {
-        url: "https://www.schoolama.studio/og-image.jpg", // Update this path
+        url: "https://www.schoolama.studio/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "SchooLama Open Graph Banner",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   robots: {
-    index: true, // 👈 Ensure this is true
+    index: true,
     follow: true,
     nocache: false,
   },
@@ -43,7 +43,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          {children} <ToastContainer position="bottom-right" theme="dark" />
+          {children}
+          <ToastContainer position="bottom-right" theme="dark" />
         </body>
       </html>
     </ClerkProvider>

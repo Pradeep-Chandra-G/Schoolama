@@ -1,4 +1,4 @@
-// app/pradeep/layout.tsx
+// src/app/pradeep/layout.tsx
 import { dmSans } from "@/lib/fonts";
 import "./portfolio.modules.scss";
 
@@ -7,6 +7,11 @@ export default function PradeepLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // This layout wraps only /pradeep routes
-  return <div className={dmSans.className}>{children}</div>;
+  return (
+    <html lang="en">
+      <body className={`pradeep-portfolio ${dmSans.className}`}>
+        {children}
+      </body>
+    </html>
+  );
 }
