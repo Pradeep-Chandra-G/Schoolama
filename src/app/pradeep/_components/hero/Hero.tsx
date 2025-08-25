@@ -62,7 +62,7 @@ const Hero = () => {
           <motion.img
             variants={textVariants}
             animate="scrollButton"
-            src="/scroll.png"
+            src="/Portfolio/scroll.png"
             alt=""
           />
         </motion.div>
