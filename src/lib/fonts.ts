@@ -8,6 +8,7 @@ export const inter = Inter({
 
 export const dmSans = DM_Sans({
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-dmSans", // for Tailwind
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });

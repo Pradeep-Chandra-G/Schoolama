@@ -8,6 +8,8 @@ export default function PradeepLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`pradeep-portfolio ${dmSans.className}`}>{children}</div>
+    <div className={`${dmSans.variable} font-dmSans pradeep-portfolio`}>
+      {children}
+    </div>
   );
 }
