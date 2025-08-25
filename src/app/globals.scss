@@ -1,37 +1,33 @@
 // app/globals.scss
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;0,9..40,1000;1,9..40,100;1,9..40,1000&display=swap');
 
-// Portfolio-specific styles (applies when body has data-page="portfolio")
-body[data-page="portfolio"] {
-  font-family: "DM Sans", sans-serif !important;
-  background-color: #0c0c1d !important;
-  color: lightgray !important;
-  
-  * {
-    font-family: "DM Sans", sans-serif !important;
-  }
-  
-  h1, h2, h3, h4, h5, h6, p, span, div {
-    font-family: "DM Sans", sans-serif !important;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  section {
-    height: 100vh;
-    width: 100vw;
-    scroll-snap-align: center;
-    overflow: hidden;
-  }
-}
-
-// Portfolio-specific HTML styles
-html:has(body[data-page="portfolio"]) {
+html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "DM Sans", sans-serif;
+}
+
+body {
+  background-color: #0c0c1d;
+  color: lightgray;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+section {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: center;
+  overflow: hidden;
 }
 
 @mixin mobile {
