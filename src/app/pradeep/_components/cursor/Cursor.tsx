@@ -22,7 +22,7 @@ const Cursor = () => {
   return (
     <motion.div
       className={`cursor ${dmSans.className}`}
-      animate={{ x: position.x+10, y: position.y+10 }}
+      animate={{ x: position.x, y: position.y }}
     ></motion.div>
   );
 };
