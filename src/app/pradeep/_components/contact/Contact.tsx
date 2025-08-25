@@ -55,12 +55,12 @@ const Contact = () => {
   return (
     <motion.div
       ref={ref}
-      className={`contact ${dmSans.className}`}
+      className="contact"
       variants={variants}
       initial="initial"
       whileInView="animate"
     >
-      <motion.div className="textContainer" variants={variants}>
+      <motion.div className={`textContainer ${dmSans.className}`} variants={variants}>
         <motion.h1 variants={variants}>Let&apos;s work together</motion.h1>
         <motion.div className="item" variants={variants}>
           <h2>Mail</h2>
