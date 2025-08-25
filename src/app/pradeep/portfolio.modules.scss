@@ -1,32 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;0,9..40,1000;1,9..40,100;1,9..40,1000&display=swap');
-
-html {
+.container {
+  background: #0c0c1d;
+  color: lightgray;
+  font-family: "DM Sans", sans-serif;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-}
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "DM Sans", sans-serif;
-}
-
-body {
-  background-color: #0c0c1d;
-  color: lightgray;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-section {
-  height: 100vh;
-  width: 100vw;
-  scroll-snap-align: center;
-  overflow: hidden;
+  section {
+    height: 100vh;
+    scroll-snap-align: center;
+    overflow: hidden;
+  }
 }
 
 @mixin mobile {
