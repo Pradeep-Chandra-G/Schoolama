@@ -216,7 +216,7 @@ export default function BlogPage() {
               Stay ahead with the latest trends, best practices, and innovations in AI-powered education and school management.
             </p>
             <a
-              href="https://schoolama-blog-frontend-030bedd2be82.herokuapp.com/"
+              href="https://blog.schoolama.studio/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-white text-indigo-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg"
@@ -348,7 +348,7 @@ export default function BlogPage() {
               Discover hundreds of articles, case studies, and insights on our dedicated blog platform.
             </p>
             <a
-              href="https://schoolama-blog-frontend-030bedd2be82.herokuapp.com/"
+              href="https://blog.schoolama.studio"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-gradient-to-r from-indigo-500 to-pink-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -388,7 +388,7 @@ export default function BlogPage() {
               <ul className="space-y-2 text-gray-400">
                 <li>
                   <a 
-                    href="https://schoolama-blog-frontend-030bedd2be82.herokuapp.com/"
+                    href="https://blog.schoolama.studio"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-white transition-colors flex items-center"

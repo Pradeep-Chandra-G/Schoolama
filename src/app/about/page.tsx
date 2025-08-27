@@ -59,32 +59,11 @@ export default function AboutPage() {
 
   const teamMembers = [
     {
-      name: "Dr. Sarah Chen",
-      role: "Chief Technology Officer",
-      bio: "AI researcher with 15+ years in educational technology and machine learning innovation.",
-      avatar: "👩‍💻",
-      gradient: "from-purple-400 to-pink-400",
-    },
-    {
-      name: "Michael Rodriguez",
-      role: "Head of Product",
-      bio: "Former educator turned product strategist, passionate about transforming learning experiences.",
+      name: "G. Pradeep Chandra",
+      role: "Full Stack Developer",
+      bio: "Crafting modern web applications and AI-integrated solutions that solve real-world problems, one project at a time.",
       avatar: "👨‍🎓",
-      gradient: "from-blue-400 to-cyan-400",
-    },
-    {
-      name: "Emily Johnson",
-      role: "Lead UX Designer",
-      bio: "Designer focused on creating intuitive, accessible, and engaging learning experiences.",
-      avatar: "👩‍🎨",
-      gradient: "from-green-400 to-teal-400",
-    },
-    {
-      name: "David Kim",
-      role: "Head of Engineering",
-      bio: "Full-stack engineer specialized in building scalable, high-performance educational platforms.",
-      avatar: "👨‍💻",
-      gradient: "from-orange-400 to-red-400",
+      gradient: "from-purple-400 to-pink-400",
     },
   ];
 
@@ -542,8 +521,7 @@ export default function AboutPage() {
               Meet Our Team
             </h2>
             <p className="text-xl text-gray-600">
-              Passionate educators and technologists working together to
-              transform learning
+              Just me, building cool stuff and learning along the way.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
